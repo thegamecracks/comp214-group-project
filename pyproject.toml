@@ -17,4 +17,5 @@ classifiers = [
 ]
 dependencies = [
     "asyncpg>=0.30.0",
+    "asyncpg-stubs~=0.30.2",
 ]

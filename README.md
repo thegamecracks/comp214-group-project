@@ -1,5 +1,11 @@
 # comp214-group-project
 
+## Technologies
+
+- Containerization: [Docker](https://docs.docker.com/)
+- Database: [PostgreSQL 18](https://www.postgresql.org/docs/18/index.html)
+- Backend: [Python](https://www.python.org/)
+
 ## Docker Setup
 
 1. Install Docker Engine or Docker Desktop: https://docs.docker.com/get-started/get-docker/

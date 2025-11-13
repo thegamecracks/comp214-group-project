@@ -1,7 +1,6 @@
 import os
 from contextlib import asynccontextmanager
 from typing import AsyncIterator
-import uuid
 
 import asyncpg
 from fastapi import FastAPI

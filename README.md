@@ -21,6 +21,33 @@
    docker compose down --volumes
    ```
 
+## Frontend Setup (Manual)
+
+1. Install Bun: https://bun.com/docs/installation
+
+   ```sh
+   # Windows
+   powershell -c "irm bun.sh/install.ps1|iex"
+   ```
+
+2. Create the frontend environment with Bun:
+
+   ```sh
+   bun install
+   ```
+
+3. Run the frontend:
+
+   ```sh
+   bun -F frontend dev
+   ```
+
+4. Build the static files to be served by the backend:
+
+   ```sh
+   bun -F frontend build
+   ```
+
 ## Backend Setup (Manual)
 
 1. Install uv: https://docs.astral.sh/uv/getting-started/installation/

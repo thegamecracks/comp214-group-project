@@ -45,11 +45,10 @@ services:
       retries: 3
       start_period: 10s
       start_interval: 1s
-    # If you have SSL certificates for postgres, uncomment this block:
-    # secrets:
-    #   - pg-dhparams
-    #   - pg-fullchain
-    #   - pg-privkey
+    secrets:
+      - pg-dhparams
+      - pg-fullchain
+      - pg-privkey
     volumes:
       - db-data:/var/lib/postgresql
 
@@ -76,14 +75,13 @@ configs:
   pg-conf:
     file: postgresql.conf
 
-# If you have SSL certificates for postgres, uncomment this block:
-# secrets:
-#   pg-dhparams:
-#     file: db/ssl/pg-dhparams.pem
-#   pg-fullchain:
-#     file: db/ssl/pg-fullchain.pem
-#   pg-privkey:
-#     file: db/ssl/pg-privkey.pem
+secrets:
+  pg-dhparams:
+    file: db/ssl/pg-dhparams.pem
+  pg-fullchain:
+    file: db/ssl/pg-fullchain.pem
+  pg-privkey:
+    file: db/ssl/pg-privkey.pem
 
 volumes:
   db-data:

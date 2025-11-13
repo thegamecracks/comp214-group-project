@@ -2,14 +2,13 @@ import datetime
 import os
 from typing import Annotated
 
-import asyncpg
 import jwt
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from pydantic import BaseModel
 
 from backend.auth import password_hash
-from backend.lifespan import acquire_transaction
+from backend.dependencies import ConnectionTransaction
 
 JWT_SECRET = os.environ.pop("BACKEND_JWT_SECRET")
 
@@ -23,7 +22,7 @@ class TokenResponse(BaseModel):
 
 @router.post("/token")
 async def token(
-    conn: Annotated[asyncpg.Connection, Depends(acquire_transaction)],
+    conn: ConnectionTransaction,
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
 ) -> TokenResponse:
     """Request a JSON Web Token for the given username and password."""

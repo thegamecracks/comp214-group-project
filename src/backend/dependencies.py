@@ -31,6 +31,7 @@ async def authenticated_account_id(
         payload = jwt.decode(
             token,
             JWT_SECRET,
+            ["HS256"],
             options={"require": ["sub", "exp", "iat"]},
         )
     except jwt.ExpiredSignatureError:

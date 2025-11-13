@@ -60,7 +60,7 @@ async def token(
         "exp": now + datetime.timedelta(minutes=15),
         "iat": now,
     }
-    token = jwt.encode(payload, JWT_SECRET)
+    token = jwt.encode(payload, JWT_SECRET, "HS256")
     return TokenResponse(access_token=token, token_type="Bearer")
 
 

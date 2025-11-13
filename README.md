@@ -39,14 +39,14 @@
    py install 3.11
    ```
 
-3. Create the backend environment with uv (make sure terminal's current working directory is in this project):
+3. Create the backend environment with uv:
 
    ```sh
-   uv sync
+   uv sync --frozen
    ```
 
 4. Run the backend:
 
    ```sh
-   uv run -m backend
+   uv run -m uvicorn backend:app
    ```

@@ -1,6 +1,10 @@
 services:
   backend:
     build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+        restart: true
     environment:
       BACKEND_DB_URI: ${BACKEND_DB_URI:?}
       UVICORN_HOST: "0.0.0.0"
@@ -55,6 +59,10 @@ services:
   # If you want the pgAdmin web dashboard, run with `docker compose --profile pgadmin up`
   pgadmin:
     image: dpage/pgadmin4
+    depends_on:
+      postgres:
+        condition: service_healthy
+        restart: true
     deploy:
       restart_policy:
         condition: on-failure

@@ -1,0 +1,10 @@
+{
+  "name": "comp214-group-project",
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/frontend"
+  ],
+  "devDependencies": {
+    "frontend": "workspace:*"
+  }
+}

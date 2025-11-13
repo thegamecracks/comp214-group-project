@@ -7,7 +7,7 @@ name = "backend"
 version = "1.0.0"
 description = ""
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.11,<3.14"
 # license = "MIT"
 # license-files = ["LICENSE"]
 authors = []
@@ -15,4 +15,6 @@ classifiers = [
     "Private :: Do Not Upload",
     "Typing :: Typed",
 ]
-dependencies = []
+dependencies = [
+    "asyncpg>=0.30.0",
+]

@@ -16,6 +16,6 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "asyncpg>=0.30.0",
-    "asyncpg-stubs~=0.30.2",
+    "asyncpg==0.30.0",
+    "asyncpg-stubs==0.30.2",
 ]

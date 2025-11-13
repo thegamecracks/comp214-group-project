@@ -11,6 +11,7 @@ CREATE TABLE account_login (
 CREATE FUNCTION fn_account_login_insert() RETURNS trigger AS $$
 BEGIN
     INSERT INTO account_login (account_id) VALUES (new.account_id);
+    RETURN NULL;
 END;
 $$ LANGUAGE plpgsql;
 

@@ -54,9 +54,11 @@ async def token(
             row["account_id"],
         )
 
+    now = utcnow()
     payload = {
         "sub": str(row["account_id"]),  # str(uuid) for serialization
-        "exp": utcnow() + datetime.timedelta(minutes=15),
+        "exp": now + datetime.timedelta(minutes=15),
+        "iat": now,
     }
     token = jwt.encode(payload, JWT_SECRET)
     return TokenResponse(access_token=token, token_type="Bearer")

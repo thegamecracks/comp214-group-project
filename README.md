@@ -1,5 +1,19 @@
 # comp214-group-project
 
+## Docker Setup
+
+1. Install Docker Engine or Docker Desktop: https://docs.docker.com/get-started/get-docker/
+2. Copy the `env.example` file to `.env`, and adjust environment variables accordingly
+3. Run the project:
+
+   ```sh
+   docker compose up
+   # To tear down:
+   docker compose down
+   # To tear down and delete existing data:
+   docker compose down --volumes
+   ```
+
 ## Backend Setup (Manual)
 
 1. Install uv: https://docs.astral.sh/uv/getting-started/installation/

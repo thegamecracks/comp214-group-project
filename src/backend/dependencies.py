@@ -1,7 +1,10 @@
 from typing import Annotated, AsyncIterator
+from uuid import UUID
 
 import asyncpg
-from fastapi import Depends
+import jwt
+from fastapi import Depends, HTTPException
+from fastapi.security import OAuth2PasswordBearer
 
 from backend import lifespan
 
@@ -16,5 +19,28 @@ async def acquire_transaction() -> AsyncIterator[asyncpg.Connection]:
         yield conn
 
 
+async def authenticated_account_id(
+    token: Annotated[str, Depends(OAuth2PasswordBearer(tokenUrl="auth/token"))],
+) -> UUID:
+    def fail_unauthorized(detail: str):
+        raise HTTPException(401, detail, {"WWW-Authenticate": "Bearer"})
+
+    from backend.routes.auth import JWT_SECRET
+
+    try:
+        payload = jwt.decode(
+            token,
+            JWT_SECRET,
+            options={"require": ["sub", "exp", "iat"]},
+        )
+    except jwt.ExpiredSignatureError:
+        return fail_unauthorized("Token expired")
+    except jwt.InvalidTokenError:
+        return fail_unauthorized("Invalid token")
+
+    return UUID(payload["sub"])
+
+
+AccountID = Annotated[UUID, Depends(authenticated_account_id)]
 Connection = Annotated[asyncpg.Connection, Depends(acquire)]
 ConnectionTransaction = Annotated[asyncpg.Connection, Depends(acquire_transaction)]

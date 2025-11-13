@@ -1,4 +1,5 @@
 .vscode/
+postgresql.conf
 *.key
 *.pem
 

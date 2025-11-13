@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from .dependencies import AccountID
 from .lifespan import lifespan
 from .middleware import add_middleware
 from .routes import auth
@@ -12,3 +13,8 @@ add_middleware(app)
 @app.get("/")
 def read_root():
     return {"hello": "world!"}
+
+
+@app.get("/users/me")
+def get_me(account_id: AccountID):
+    return {"account_id": account_id}

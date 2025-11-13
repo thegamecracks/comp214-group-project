@@ -77,11 +77,11 @@ configs:
 
 secrets:
   pg-dhparams:
-    file: db/ssl/pg-dhparams.pem
+    file: ssl/pg-dhparams.pem
   pg-fullchain:
-    file: db/ssl/pg-fullchain.pem
+    file: ssl/pg-fullchain.pem
   pg-privkey:
-    file: db/ssl/pg-privkey.pem
+    file: ssl/pg-privkey.pem
 
 volumes:
   db-data:

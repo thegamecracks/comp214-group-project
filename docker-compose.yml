@@ -53,17 +53,24 @@ services:
     volumes:
       - db-data:/var/lib/postgresql
 
-  # If you want the pgAdmin web dashboard, uncomment this service:
-  # pgadmin:
-  #   image: dpage/pgadmin4
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:?}
-  #     PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:?}
-  #   ports:
-  #     - ${PGADMIN_PORT:?}:80
-  #   restart: always
-  #   volumes:
-  #     - pgadmin-data:/var/lib/pgadmin
+  # If you want the pgAdmin web dashboard, run with `docker compose --profile pgadmin up`
+  pgadmin:
+    image: dpage/pgadmin4
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 0s
+        max_attempts: 3
+        window: 120s
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:?}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:?}
+    ports:
+      - ${PGADMIN_PORT:?}:80
+    profiles:
+      - pgadmin
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
 
 configs:
   pg-conf:

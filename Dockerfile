@@ -12,4 +12,4 @@ WORKDIR /home/runner
 ENV PYTHONUNBUFFERED=1
 STOPSIGNAL SIGINT
 ENTRYPOINT ["uv", "run", "--frozen", "--no-sync", "-m"]
-CMD ["backend"]
+CMD ["uvicorn", "backend:app"]

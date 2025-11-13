@@ -3,12 +3,16 @@ services:
     build: .
     environment:
       BACKEND_DB_URI: ${BACKEND_DB_URI:?}
+      UVICORN_HOST: "0.0.0.0"
+      UVICORN_PORT: ${BACKEND_PORT:?}
     deploy:
       restart_policy:
         condition: on-failure
         delay: 0s
         max_attempts: 3
         window: 120s
+    ports:
+      - ${BACKEND_PORT:?}:${BACKEND_PORT:?}
 
   postgres:
     build: db

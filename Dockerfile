@@ -1,7 +1,7 @@
 FROM ghcr.io/astral-sh/uv:python3.11-alpine
 
 COPY --link src/ src/
-COPY --link pyproject.toml uv.lock ./
+COPY --link README.md pyproject.toml uv.lock ./
 RUN --mount=type=cache,target=/root/.cache \
     uv sync --frozen
 

@@ -19,6 +19,12 @@ async def acquire() -> AsyncIterator[asyncpg.Connection]:
 
 
 @asynccontextmanager
+async def acquire_transaction() -> AsyncIterator[asyncpg.Connection]:
+    async with acquire() as conn, conn.transaction():
+        yield conn
+
+
+@asynccontextmanager
 async def lifespan(app: FastAPI):
     global _pool
 
@@ -40,7 +46,7 @@ async def _ensure_admin_user() -> None:
     user = os.environ.pop("BACKEND_ADMIN_USER")
     password = os.environ.pop("BACKEND_ADMIN_PASS")
 
-    async with acquire() as conn:
+    async with acquire_transaction() as conn:
         account_id = await conn.fetchval(
             "INSERT INTO account (name) VALUES ($1) ON CONFLICT DO NOTHING "
             "RETURNING account_id",

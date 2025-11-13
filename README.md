@@ -4,7 +4,7 @@
 
 - Containerization: [Docker](https://docs.docker.com/)
 - Database: [PostgreSQL 18](https://www.postgresql.org/docs/18/index.html)
-- Backend: [Python](https://www.python.org/)
+- Backend: [Python](https://www.python.org/) with [FastAPI](https://fastapi.tiangolo.com/)
 
 ## Docker Setup
 

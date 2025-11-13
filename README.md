@@ -13,7 +13,7 @@
 3. Run the project:
 
    ```sh
-   docker compose up
+   docker compose up --build
    # To tear down:
    docker compose down
    # To tear down and delete existing data:

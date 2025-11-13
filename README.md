@@ -10,7 +10,8 @@
 
 1. Install Docker Engine or Docker Desktop: https://docs.docker.com/get-started/get-docker/
 2. Copy the `env.example` file to `.env`, and adjust environment variables accordingly
-3. Run the project:
+3. Copy the `postgresql.conf.example` file to `postgresql.conf`
+4. Run the project:
 
    ```sh
    docker compose up --build

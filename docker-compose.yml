@@ -6,6 +6,8 @@ services:
         condition: service_healthy
         restart: true
     environment:
+      BACKEND_ADMIN_USER: ${BACKEND_ADMIN_USER:?}
+      BACKEND_ADMIN_PASS: ${BACKEND_ADMIN_PASS:?}
       BACKEND_DB_URI: ${BACKEND_DB_URI:?}
       UVICORN_HOST: "0.0.0.0"
       UVICORN_PORT: ${BACKEND_PORT:?}

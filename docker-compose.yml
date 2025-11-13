@@ -1,0 +1,79 @@
+services:
+  backend:
+    build: .
+    environment:
+      BACKEND_DB_URI: ${BACKEND_DB_URI:?}
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 0s
+        max_attempts: 3
+        window: 120s
+
+  postgres:
+    build: db
+    command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
+    configs:
+      - source: pg-conf
+        target: /etc/postgresql/postgresql.conf
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 0s
+        max_attempts: 3
+        window: 120s
+    environment:
+      # Initialization
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?}
+      POSTGRES_USER: ${DB_USER:?}
+      POSTGRES_DB: ${DB_DATABASE:?}
+      # Healthcheck
+      PGPORT: ${DB_PORT:?}
+      PGPASSWORD: ${DB_PASSWORD:?}
+      PGUSER: ${DB_USER:?}
+      PGDATABASE: ${DB_DATABASE:?}
+    ports:
+      - ${DB_PORT:?}:${DB_PORT:?}
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 30s
+      timeout: 1s
+      retries: 3
+      start_period: 10s
+      start_interval: 1s
+    # If you have SSL certificates for postgres, uncomment this block:
+    # secrets:
+    #   - pg-dhparams
+    #   - pg-fullchain
+    #   - pg-privkey
+    volumes:
+      - db-data:/var/lib/postgresql
+
+  # If you want the pgAdmin web dashboard, uncomment this service:
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:?}
+  #     PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:?}
+  #   ports:
+  #     - ${PGADMIN_PORT:?}:80
+  #   restart: always
+  #   volumes:
+  #     - pgadmin-data:/var/lib/pgadmin
+
+configs:
+  pg-conf:
+    file: db/postgresql.conf
+
+# If you have SSL certificates for postgres, uncomment this block:
+# secrets:
+#   pg-dhparams:
+#     file: db/ssl/pg-dhparams.pem
+#   pg-fullchain:
+#     file: db/ssl/pg-fullchain.pem
+#   pg-privkey:
+#     file: db/ssl/pg-privkey.pem
+
+volumes:
+  db-data:
+  pgadmin-data:

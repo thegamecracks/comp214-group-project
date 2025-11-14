@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from starlette.staticfiles import StaticFiles
 
 from .dependencies import AccountID
 from .lifespan import lifespan
@@ -6,6 +7,7 @@ from .middleware import add_middleware
 from .routes import auth
 
 app = FastAPI(lifespan=lifespan)
+app.mount("/", StaticFiles(directory="packages/frontend/dist", html=True))
 app.include_router(auth.router)
 add_middleware(app)
 

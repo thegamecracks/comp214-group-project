@@ -20,5 +20,5 @@ RUN --mount=type=cache,target=/root/.cache \
 USER runner
 ENV PYTHONUNBUFFERED=1
 STOPSIGNAL SIGINT
-ENTRYPOINT ["uv", "run", "--frozen", "--no-sync", "-m"]
+ENTRYPOINT ["uv", "--no-cache", "run", "--frozen", "--no-sync", "-m"]
 CMD ["uvicorn", "backend:app"]

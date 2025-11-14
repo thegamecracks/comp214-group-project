@@ -1,7 +1,16 @@
+FROM oven/bun:alpine AS frontend
+
+COPY --link packages/ packages/
+COPY --link bun.lock package.json tsconfig.json ./
+RUN --mount=type=cache,target=/root/.bun \
+    bun install --frozen-lockfile
+RUN bun -F frontend build
+
 FROM ghcr.io/astral-sh/uv:python3.11-alpine
 
 COPY --link packages/ packages/
 COPY --link pyproject.toml uv.lock ./
+COPY --from=frontend /home/bun/app/packages/frontend/dist/ packages/frontend/dist/
 RUN --mount=type=cache,target=/root/.cache \
     uv sync --frozen
 

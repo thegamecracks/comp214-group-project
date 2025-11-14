@@ -22,7 +22,7 @@ services:
         window: 120s
     develop:
       watch:
-        - path: src/backend/
+        - path: packages/
           action: rebuild
     ports:
       - ${BACKEND_PORT:?}:${BACKEND_PORT:?}

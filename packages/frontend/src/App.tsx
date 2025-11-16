@@ -1,18 +1,16 @@
-import { BrowserRouter, Route, Routes } from "react-router";
+import { useState } from "react";
 
-import Frame from "./Frame";
-import Home from "./Home";
+import { Auth, AuthContext } from "./auth";
+import Router from "./Router";
 import "./index.css";
 
 export function App() {
+  const [token, setToken] = useState("")
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Frame />}>
-          <Route index element={<Home />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <AuthContext value={new Auth(token, setToken)}>
+      <Router />
+    </AuthContext>
   );
 }
 

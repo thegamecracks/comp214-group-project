@@ -1,5 +1,5 @@
-import { Outlet } from "react-router";
-import Navbar from "./Navbar";
+import { Outlet } from "react-router"
+import Navbar from "./Navbar"
 
 export function Frame() {
   return (
@@ -7,7 +7,7 @@ export function Frame() {
       <Navbar />
       <Outlet />
     </div>
-  );
+  )
 }
 
-export default Frame;
+export default Frame

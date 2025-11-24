@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun --hot src/index.html",
+    "dev": "bun run --hot index.ts",
     "start": "NODE_ENV=production bun index.ts",
     "build": "bun run build.ts"
   },

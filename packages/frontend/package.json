@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "bun run --env-file ../../.env --hot src/index.html",
-    "start": "NODE_ENV=production bun src/index.html",
+    "start": "NODE_ENV=production bun run src/index.html --host=0.0.0.0",
     "build": "bun run build.ts"
   },
   "dependencies": {

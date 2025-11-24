@@ -34,7 +34,6 @@ services:
     depends_on:
       - backend
     environment:
-      BUN_HOST: "0.0.0.0"
       BUN_PORT: ${BUN_PORT:?}
       BUN_PUBLIC_API: ${BUN_PUBLIC_API:?}
     deploy:

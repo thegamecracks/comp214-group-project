@@ -1,6 +1,7 @@
 services:
   backend:
-    build: .
+    build:
+      dockerfile: ./backend.Dockerfile
     depends_on:
       postgres:
         condition: service_healthy
@@ -22,10 +23,32 @@ services:
         window: 120s
     develop:
       watch:
-        - path: packages/
+        - path: packages/backend/
           action: rebuild
     ports:
       - ${BACKEND_PORT:?}:${BACKEND_PORT:?}
+
+  frontend:
+    build:
+      dockerfile: ./frontend.Dockerfile
+    depends_on:
+      - backend
+    environment:
+      BUN_HOST: "0.0.0.0"
+      BUN_PORT: ${BUN_PORT:?}
+      BUN_PUBLIC_API: ${BUN_PUBLIC_API:?}
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 0s
+        max_attempts: 3
+        window: 120s
+    develop:
+      watch:
+        - path: packages/frontend/
+          action: rebuild
+    ports:
+      - ${BUN_PORT:?}:${BUN_PORT:?}
 
   postgres:
     build: db

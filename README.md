@@ -39,13 +39,13 @@
 3. Run the frontend:
 
    ```sh
-   bun -F frontend dev
+   bun --cwd packages/frontend dev
    ```
 
-4. Build the static files to be served by the backend:
+4. Build static files for production:
 
    ```sh
-   bun -F frontend build
+   bun --cwd packages/frontend build
    ```
 
 ## Backend Setup (Manual)

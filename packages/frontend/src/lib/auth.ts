@@ -1,5 +1,7 @@
 import { createContext } from "react"
 
+const BASE_URL = `${process.env.BUN_PUBLIC_API}`.replace(/\/$/, "")
+
 export class Auth {
   token: string
   _setToken: (token: string) => void
@@ -24,7 +26,7 @@ export class Auth {
   }
 
   getFullURL(path: string) {
-    return `${import.meta.env.VITE_API_BASE}${path}`
+    return `${BASE_URL}${path}`
   }
 
   async authFetch(input: RequestInfo | URL, init?: RequestInit | undefined) {

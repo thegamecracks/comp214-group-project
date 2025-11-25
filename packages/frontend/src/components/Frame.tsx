@@ -13,7 +13,7 @@ export function Frame() {
         <div className="flex-1" />
         {!auth.isLoggedIn() ? <Link to="/login" className="btn btn-ghost text-xl">Login</Link> : <></>}
         {!auth.isLoggedIn() ? <Link to="/login" className="btn btn-ghost text-xl">Register</Link> : <></>}
-        {auth.isLoggedIn() ? <button onClick={auth.clearToken} className="btn btn-ghost text-xl">Logout</button> : <></>}
+        {auth.isLoggedIn() ? <button onClick={() => auth.clearToken()} className="btn btn-ghost text-xl">Logout</button> : <></>}
       </nav>
       <Outlet />
     </div>

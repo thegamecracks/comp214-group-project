@@ -1,14 +1,30 @@
+import axios from "axios"
 import { createContext } from "react"
+import type { AxiosInstance } from "axios"
 
-const BASE_URL = `${process.env.BUN_PUBLIC_API}`.replace(/\/$/, "")
+const BASE_URL = `${process.env.BUN_PUBLIC_API}`
 
 export class Auth {
-  token: string
-  _setToken: (token: string) => void
+  client: AxiosInstance
+
+  private token: string
+  private _setToken: (token: string) => void
 
   constructor(token: string, setToken: (token: string) => void) {
     this.token = token
     this._setToken = setToken
+
+    const headers = token ? { Authorization: token } : {}
+    this.client = axios.create({
+      baseURL: BASE_URL,
+      headers: headers,
+      timeout: 3000,
+    })
+  }
+
+  get api() : AxiosInstance {
+    if (!this.isLoggedIn()) throw new Error("Missing authorization token")
+    return this.client
   }
 
   setToken(token: string) {
@@ -23,40 +39,6 @@ export class Auth {
 
   isLoggedIn() {
     return !!this.token
-  }
-
-  getFullURL(path: string) {
-    return `${BASE_URL}${path}`
-  }
-
-  async fetch(path: string, init?: RequestInit | undefined) {
-    if (!this.isLoggedIn()) throw new Error("Missing authorization token")
-
-    init = init || {}
-    const input = this.getFullURL(path)
-    const headers = new Headers(init.headers || {})
-    headers.set("Authorization", this.token)
-    return await fetch(input, { ...init, headers })
-  }
-
-  async get(path: string, init?: RequestInit | undefined) {
-    return await this.fetch(path, { ...init, method: "GET" })
-  }
-
-  async post(path: string, init?: RequestInit | undefined) {
-    return await this.fetch(path, { ...init, method: "POST" })
-  }
-
-  async put(path: string, init?: RequestInit | undefined) {
-    return await this.fetch(path, { ...init, method: "PUT" })
-  }
-
-  async patch(path: string, init?: RequestInit | undefined) {
-    return await this.fetch(path, { ...init, method: "PATCH" })
-  }
-
-  async delete(path: string, init?: RequestInit | undefined) {
-    return await this.fetch(path, { ...init, method: "DELETE" })
   }
 }
 export const AuthContext = createContext<Auth | null>(null)

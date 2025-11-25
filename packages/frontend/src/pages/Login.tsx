@@ -3,6 +3,7 @@ import { useNavigate } from "react-router"
 import type { FormEvent } from "react"
 
 import { AuthContext } from "@/lib/auth"
+import axios from "axios"
 
 function Login() {
   const auth = useContext(AuthContext)!
@@ -12,18 +13,14 @@ function Login() {
   async function tryLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
-    const url = auth.getFullURL("/auth/token")
-    const body = new FormData(e.currentTarget)
     try {
-      const res = await fetch(url, { body, method: "POST" })
-      const payload = await res.json()
-      if (payload.error) throw new Error(payload.error.message)
-      if (!res.ok) throw new Error(`HTTP ${res.status} (${res.statusText})`)
-
-      auth.setToken(`${payload.token_type} ${payload.access_token}`)
+      const { data } = await auth.client.post("/auth/token", e.target)
+      auth.setToken(`${data.token_type} ${data.access_token}`)
       navigate("/", { replace: true })
     } catch (error) {
-      setError(String(error))
+      if (!axios.isAxiosError(error)) setError(String(error))
+      else if (error.status === 401) setError("Sorry, you entered an incorrect username or password.")
+      else setError(String(error))
     }
   }
 

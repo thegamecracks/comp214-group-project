@@ -5,6 +5,7 @@ import "./index.css"
 import Frame from "./components/Frame"
 import { Auth, AuthContext } from "./lib/auth"
 import Home from "./pages/Home"
+import Login from "./pages/Login"
 
 export function App() {
   const [token, setToken] = useState("")
@@ -15,6 +16,7 @@ export function App() {
         <Routes>
           <Route element={<Frame />}>
             <Route index element={<Home />} />
+            <Route path="/login" element={<Login />} />
           </Route>
         </Routes>
       </BrowserRouter>

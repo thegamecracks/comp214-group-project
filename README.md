@@ -2,13 +2,14 @@
 
 ## Technologies
 
-- Containerization: [Docker](https://docs.docker.com/)
+- Containerization: [Docker](https://docs.docker.com/) or [Podman](https://podman.io/)
 - Database: [PostgreSQL 18](https://www.postgresql.org/docs/18/index.html)
 - Backend: [Python](https://www.python.org/) with [FastAPI](https://fastapi.tiangolo.com/)
 
-## Docker Setup
+## Containerization Setup
 
-1. Install Docker Engine or Docker Desktop: https://docs.docker.com/get-started/get-docker/
+1. Install [Docker Desktop](https://docs.docker.com/get-started/get-docker/)
+   or [Podman](https://podman.io/docs/installation)
 2. Copy the `env.example` file to `.env`, and adjust environment variables accordingly
 3. Copy the `postgresql.conf.example` file to `postgresql.conf`
 4. Run the project:
@@ -19,6 +20,10 @@
    docker compose down
    # To tear down and delete existing data:
    docker compose down --volumes
+   # Or with podman:
+   podman compose up
+   podman compose down
+   podman compose down --volumes
    ```
 
 ## Frontend Setup (Manual)

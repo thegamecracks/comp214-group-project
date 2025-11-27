@@ -89,7 +89,7 @@ services:
 
   # If you want the pgAdmin web dashboard, run with `docker compose --profile pgadmin up`
   pgadmin:
-    image: dpage/pgadmin4
+    image: docker.io/dpage/pgadmin4
     depends_on:
       postgres:
         condition: service_healthy

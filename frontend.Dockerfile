@@ -1,4 +1,4 @@
-FROM oven/bun:alpine
+FROM docker.io/oven/bun:alpine
 
 RUN addgroup --gid 32841 -S runner && adduser --uid 32841 -S runner -G runner
 WORKDIR /home/runner

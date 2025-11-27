@@ -6,6 +6,7 @@ RUN --mount=type=cache,target=/root/.bun \
     bun install --frozen-lockfile
 COPY --link packages/frontend/ packages/frontend/
 
+ARG BUN_PUBLIC_API
 RUN  --mount=type=cache,target=/root/.bun \
     bun run --cwd packages/frontend build
 

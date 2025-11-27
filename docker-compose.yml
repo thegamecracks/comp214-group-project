@@ -31,11 +31,12 @@ services:
   frontend:
     build:
       dockerfile: ./frontend.Dockerfile
+      args:
+        BUN_PUBLIC_API: ${BUN_PUBLIC_API:?}
     depends_on:
       - backend
     environment:
       BUN_PORT: ${BUN_PORT:?}
-      BUN_PUBLIC_API: ${BUN_PUBLIC_API:?}
     deploy:
       restart_policy:
         condition: on-failure

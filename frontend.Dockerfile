@@ -1,7 +1,7 @@
 FROM docker.io/oven/bun:alpine AS build
 
 COPY --link packages/frontend/package.json packages/frontend/
-COPY --link bun.lock package.json tsconfig.json ./
+COPY --link bun.lock bunfig.toml package.json tsconfig.json ./
 RUN --mount=type=cache,target=/root/.bun \
     bun install --frozen-lockfile
 COPY --link packages/frontend/ packages/frontend/

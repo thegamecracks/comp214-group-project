@@ -35,8 +35,6 @@ services:
         BUN_PUBLIC_API: ${BUN_PUBLIC_API:?}
     depends_on:
       - backend
-    environment:
-      BUN_PORT: ${BUN_PORT:?}
     deploy:
       restart_policy:
         condition: on-failure

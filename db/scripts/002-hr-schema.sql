@@ -4,7 +4,7 @@ CREATE TABLE region (
 );
 
 CREATE TABLE country (
-    country_id BIGSERIAL PRIMARY KEY,
+    country_id CHAR(2) PRIMARY KEY,
     region_id BIGINT REFERENCES region (region_id),
     name VARCHAR(40) -- country_name
 );
@@ -12,7 +12,7 @@ CREATE INDEX ix_country_region_id ON country (region_id);
 
 CREATE TABLE location (
     location_id BIGSERIAL PRIMARY KEY,
-    country_id BIGINT REFERENCES country (country_id),
+    country_id CHAR(2) REFERENCES country (country_id),
     city VARCHAR(30) NOT NULL,
     street_address VARCHAR(40),
     postal_code VARCHAR(12),
@@ -30,7 +30,7 @@ CREATE INDEX ix_department_manager_id ON department (manager_id);
 CREATE INDEX ix_department_location_id ON department (location_id);
 
 CREATE TABLE job (
-    job_id BIGSERIAL PRIMARY KEY,
+    job_id VARCHAR(10) PRIMARY KEY,
     job_title VARCHAR(35) NOT NULL,
     min_salary NUMERIC(6),
     max_salary NUMERIC(6)
@@ -43,10 +43,10 @@ CREATE TABLE employee (
     email VARCHAR(25) NOT NULL UNIQUE,
     phone_number VARCHAR(20),
     hire_date DATE NOT NULL,
-    job_id BIGINT NOT NULL REFERENCES job (job_id),
+    job_id VARCHAR(10) NOT NULL REFERENCES job (job_id),
     salary NUMERIC(8,2),
     commission_pct NUMERIC(2,2),
-    manager_id BIGINT REFERENCES employee,
+    manager_id BIGINT REFERENCES employee (employee_id),
     department_id BIGINT REFERENCES department (department_id)
 );
 CREATE INDEX ix_employee_job_id ON employee (job_id);
@@ -58,7 +58,8 @@ CREATE TABLE job_history (
     employee_id BIGINT NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
-    job_id BIGINT NOT NULL REFERENCES job (job_id),
+    job_id VARCHAR(10) NOT NULL REFERENCES job (job_id),
+    department_id BIGINT NOT NULL REFERENCES department (department_id),
     PRIMARY KEY (employee_id, start_date)
 );
 CREATE INDEX ix_job_history_job_id ON job_history (job_id);

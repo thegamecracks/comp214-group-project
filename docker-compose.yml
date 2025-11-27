@@ -47,7 +47,7 @@ services:
         - path: packages/frontend/
           action: rebuild
     ports:
-      - ${BUN_PORT:?}:${BUN_PORT:?}
+      - ${BUN_PORT:?}:80
 
   postgres:
     build: db

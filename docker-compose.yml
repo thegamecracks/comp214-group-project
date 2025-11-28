@@ -4,7 +4,7 @@ services:
       dockerfile: ./backend.Dockerfile
     depends_on:
       postgres:
-        condition: service_healthy
+        condition: service_started
         restart: true
     environment:
       BACKEND_ADMIN_USER: ${BACKEND_ADMIN_USER:?}
@@ -74,11 +74,11 @@ services:
       - ${DB_PORT:?}:${DB_PORT:?}
     healthcheck:
       test: ["CMD", "pg_isready"]
-      interval: 30s
+      interval: 5s
       timeout: 1s
       retries: 3
-      start_period: 10s
-      # start_interval: 1s
+      # start_period: 10s
+      # start_interval: 1s  # incompatible with Podman
     secrets:
       - pg-dhparams
       - pg-fullchain
@@ -91,7 +91,7 @@ services:
     image: docker.io/dpage/pgadmin4
     depends_on:
       postgres:
-        condition: service_healthy
+        condition: service_started
         restart: true
     deploy:
       restart_policy:

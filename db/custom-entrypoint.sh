@@ -10,4 +10,4 @@ for file in pg-dhparams pg-fullchain pg-privkey; do
     chown postgres:postgres /etc/postgresql/$file
 done
 
-docker-entrypoint.sh $@
+exec docker-entrypoint.sh $@

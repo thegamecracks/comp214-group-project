@@ -130,7 +130,7 @@ wheels = [
 [[package]]
 name = "backend"
 version = "1.0.0"
-source = { editable = "packages/backend" }
+source = { virtual = "packages/backend" }
 dependencies = [
     { name = "asgi-ratelimit" },
     { name = "asyncpg" },
@@ -239,7 +239,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "backend", editable = "packages/backend" }]
+requires-dist = [{ name = "backend", virtual = "packages/backend" }]
 
 [[package]]
 name = "cryptography"

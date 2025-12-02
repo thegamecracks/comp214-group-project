@@ -12,5 +12,5 @@ COPY --link packages/backend/src/ packages/backend/src/
 USER runner
 ENV PYTHONUNBUFFERED=1
 STOPSIGNAL SIGINT
-ENTRYPOINT ["uv", "--no-cache", "run", "--frozen", "--no-sync", "-m"]
+ENTRYPOINT ["uv", "--no-cache", "run", "--directory", "packages/backend/src/", "--frozen", "--no-sync", "-m"]
 CMD ["uvicorn", "backend:app"]

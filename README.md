@@ -80,5 +80,5 @@
 4. Run the backend:
 
    ```sh
-   uv run -m uvicorn backend:app --env-file .env
+   uv run --directory packages/backend/src/ --env-file ../../../.env -m uvicorn backend:app
    ```

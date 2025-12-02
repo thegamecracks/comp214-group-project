@@ -69,6 +69,8 @@ export class Toast {
   }
 
   error(error: any) {
+    if (error.name === "CanceledError") return;
+
     let toast = (
       <ErrorToast>
         <span>{error.message || error}</span>

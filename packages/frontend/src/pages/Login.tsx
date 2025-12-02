@@ -5,7 +5,7 @@ import type { FormEvent } from "react"
 import { useAuth } from "@/lib/auth"
 import { useToast } from "@/lib/toast"
 
-function Login() {
+export default function Login() {
   const auth = useAuth()
   const navigate = useNavigate()
   const toast = useToast()
@@ -41,5 +41,3 @@ function Login() {
     </div>
   )
 }
-
-export default Login

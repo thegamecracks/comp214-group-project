@@ -6,7 +6,7 @@ import { useAuth } from "@/lib/auth"
 import { useToast } from "@/lib/toast"
 import type { Employee } from "@/types"
 
-export function Home() {
+export default function Home() {
   const auth = useAuth()
   const toast = useToast()
   const [employees, setEmployees] = useState<Employee[]>([])
@@ -51,5 +51,3 @@ export function Home() {
     </div>
   )
 }
-
-export default Home

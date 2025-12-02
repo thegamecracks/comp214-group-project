@@ -13,7 +13,7 @@ export function Frame() {
 
   return (
     <ToastContext value={new Toast(setToast)}>
-      <nav className="navbar flex min-h-0 p-4">
+      <nav className="navbar flex min-h-0 px-4 py-2 bg-base-100 shadow">
         {loggedIn ? <Link to="/" className="btn btn-ghost text-xl">Home</Link> : <></>}
         <div className="flex-1" />
         {!loggedIn ? <Link to="/login" className="btn btn-ghost text-xl">Login</Link> : <></>}

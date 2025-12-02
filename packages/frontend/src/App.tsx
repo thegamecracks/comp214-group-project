@@ -6,6 +6,7 @@ import Frame from "./components/Frame"
 import { Auth, AuthContext, useAuthData } from "./lib/auth"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
+import Protected from "./components/Protected"
 
 export function App() {
   const [auth, setAuth] = useAuthData()
@@ -15,7 +16,9 @@ export function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Frame />}>
-            <Route index element={<Home />} />
+            <Route element={<Protected />}>
+              <Route index element={<Home />} />
+            </Route>
             <Route path="/login" element={<Login />} />
           </Route>
         </Routes>

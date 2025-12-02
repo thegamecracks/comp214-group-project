@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { StrictMode, useState } from "react"
 import { BrowserRouter, Route, Routes } from "react-router"
 import type { ReactNode } from "react"
 
@@ -15,21 +15,23 @@ export function App() {
   const [toast, setToast] = useState<ReactNode | null>(null)
 
   return (
-    <AuthContext value={new Auth(auth, setAuth)}>
-      <BrowserRouter>
-        <ToastContext value={new Toast(setToast)}>
-          <Routes>
-            <Route element={<Frame />}>
-              <Route element={<Protected />}>
-                <Route index element={<Home />} />
+    <StrictMode>
+      <AuthContext value={new Auth(auth, setAuth)}>
+        <BrowserRouter>
+          <ToastContext value={new Toast(setToast)}>
+            <Routes>
+              <Route element={<Frame />}>
+                <Route element={<Protected />}>
+                  <Route index element={<Home />} />
+                </Route>
+                <Route path="/login" element={<Login />} />
               </Route>
-              <Route path="/login" element={<Login />} />
-            </Route>
-          </Routes>
-          {toast}
-        </ToastContext>
-      </BrowserRouter>
-    </AuthContext>
+            </Routes>
+            {toast}
+          </ToastContext>
+        </BrowserRouter>
+      </AuthContext>
+    </StrictMode>
   )
 }
 

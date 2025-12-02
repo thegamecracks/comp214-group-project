@@ -1,4 +1,11 @@
-export type Employee = {
+export type Department = {
+    department_id: number
+    manager_id: number | null
+    location_id: number
+    name: string
+}
+
+    export type Employee = {
     employee_id: number
     first_name: string | null
     last_name: string
@@ -10,4 +17,12 @@ export type Employee = {
     commission_pct: number | null
     manager_id: number | null
     department_id: number | null
+}
+
+export type Job = {
+    job_id: string
+    job_title: string
+    job_description: string
+    min_salary: number | null
+    max_salary: number | null
 }

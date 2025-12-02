@@ -17,6 +17,7 @@ router = APIRouter(prefix="/auth")
 
 class TokenResponse(BaseModel):
     access_token: str
+    sub: str
     token_type: str
 
 
@@ -55,13 +56,14 @@ async def token(
         )
 
     now = utcnow()
+    sub = str(row["account_id"])  # str(uuid) for serialization
     payload = {
-        "sub": str(row["account_id"]),  # str(uuid) for serialization
+        "sub": sub,
         "exp": now + datetime.timedelta(minutes=15),
         "iat": now,
     }
     token = jwt.encode(payload, JWT_SECRET, "HS256")
-    return TokenResponse(access_token=token, token_type="Bearer")
+    return TokenResponse(access_token=token, sub=sub, token_type="Bearer")
 
 
 def utcnow() -> datetime.datetime:

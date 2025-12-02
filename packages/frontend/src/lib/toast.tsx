@@ -69,7 +69,7 @@ export class Toast {
   error(error: any) {
     let toast = (
       <ErrorToast>
-        <span>Something went wrong: {error.message || error}</span>
+        <span>{error.message || error}</span>
       </ErrorToast>
     )
 

@@ -1,14 +1,14 @@
-import { useState } from "react"
+import axios from "axios"
 import { useNavigate } from "react-router"
 import type { FormEvent } from "react"
 
 import { useAuth } from "@/lib/auth"
-import axios from "axios"
+import { useToast } from "@/lib/Toast"
 
 function Login() {
   const auth = useAuth()
-  const [error, setError] = useState("")
   const navigate = useNavigate()
+  const toast = useToast()
 
   async function tryLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -18,9 +18,9 @@ function Login() {
       auth.saveAuthFromResponse(res)
       navigate("/", { replace: true })
     } catch (error) {
-      if (!axios.isAxiosError(error)) setError(String(error))
-      else if (error.status === 401) setError("Sorry, you entered an incorrect username or password.")
-      else setError(String(error))
+      if (!axios.isAxiosError(error)) toast.error(error)
+      else if (error.status === 401) toast.error("Sorry, you entered an incorrect username or password.")
+      else toast.error(error)
     }
   }
 
@@ -37,7 +37,6 @@ function Login() {
           <input type="password" name="password" required />
         </label>
         <button type="submit" className="btn btn-primary">Login</button>
-        {error ? <p className="alert alert-error">{error}</p> : <></>}
       </form>
     </div>
   )

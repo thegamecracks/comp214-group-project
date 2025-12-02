@@ -11,7 +11,7 @@ export function Protected() {
       <h1 className="text-2xl font-bold">This page requires authentication!</h1>
       <p className="flex gap-4 items-center">
         Please click the following button to login.
-        <Link to="/login" className="btn">Login</Link>
+        <Link to="/login" className="btn" viewTransition>Login</Link>
       </p>
     </div>
   )

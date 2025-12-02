@@ -14,10 +14,10 @@ export function Frame() {
   return (
     <ToastContext value={new Toast(setToast)}>
       <nav className="navbar flex min-h-0 px-4 py-2 bg-base-100 shadow">
-        {loggedIn ? <Link to="/" className="btn btn-ghost text-xl">Employees</Link> : <></>}
+        {loggedIn ? <Link to="/" className="btn btn-ghost text-xl" viewTransition>Employees</Link> : <></>}
         <div className="flex-1" />
-        {!loggedIn ? <Link to="/login" className="btn btn-ghost text-xl">Login</Link> : <></>}
-        {!loggedIn ? <Link to="/login" className="btn btn-ghost text-xl">Register</Link> : <></>}
+        {!loggedIn ? <Link to="/login" className="btn btn-ghost text-xl" viewTransition>Login</Link> : <></>}
+        {!loggedIn ? <Link to="/login" className="btn btn-ghost text-xl" viewTransition>Register</Link> : <></>}
         {loggedIn ? <Link to="/login" onClick={() => auth.clearAuth()} className="btn btn-ghost text-xl">Logout</Link> : <></>}
       </nav>
       <Outlet />

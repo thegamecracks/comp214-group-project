@@ -16,7 +16,7 @@ export default function Login() {
     try {
       const res = await auth.client.post("/auth/token", e.target)
       auth.saveAuthFromResponse(res)
-      navigate("/", { replace: true })
+      navigate("/", { replace: true, viewTransition: true })
     } catch (error) {
       if (!axios.isAxiosError(error)) toast.error(error)
       else if (error.status === 401) toast.error("Sorry, you entered an incorrect username or password.")

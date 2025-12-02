@@ -9,7 +9,7 @@ export function JobList({
 }) {
   return (
     <div className="overflow-auto">
-      <table className="table table-sm table-zebra">
+      <table className="table table-zebra">
         <thead>
           <tr>
             <th>#</th>

@@ -70,7 +70,7 @@ export default function Home() {
   })
 
   return (
-    <div className="mx-8 my-4 h-svh grid grid-flow-col grid-cols-5 grid-rows-3 gap-4">
+    <div className="mx-8 my-4 h-[90svh] grid grid-flow-col grid-cols-5 grid-rows-3 gap-4">
       <section className="row-span-3 col-span-1 overflow-auto shadow rounded">
         <Header>
           <h1 className="text-xl font-bold">Filter by department</h1>

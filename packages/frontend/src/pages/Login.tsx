@@ -25,7 +25,7 @@ export default function Login() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="h-[90svh] flex flex-col items-center justify-center">
       <form onSubmit={tryLogin} className="flex flex-col p-4 gap-4 bg-base-200">
         <h1 className="text-2xl font-bold">Log In</h1>
         <label className="input w-md">

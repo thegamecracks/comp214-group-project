@@ -33,7 +33,15 @@ async def authenticated_account(
 
 
 async def authenticated_account_id(
-    token: Annotated[str, Depends(OAuth2PasswordBearer(tokenUrl="auth/token"))],
+    token: Annotated[
+        str,
+        Depends(
+            OAuth2PasswordBearer(
+                tokenUrl="auth/token",
+                refreshUrl="auth/token/refresh",
+            )
+        ),
+    ],
 ) -> UUID:
     def fail_unauthorized(detail: str):
         raise HTTPException(401, detail, {"WWW-Authenticate": "Bearer"})

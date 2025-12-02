@@ -13,7 +13,7 @@ export function Home() {
   useEffect(() => {
     async function getEmployees() {
       try {
-        const { data } = await auth.api.get("/employees/", { signal })
+        const { data } = await auth.api.get("/employees", { signal })
         setEmployees(data)
       } catch (error) {
         toast.error(error)

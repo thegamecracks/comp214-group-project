@@ -22,7 +22,7 @@ class Employee(BaseModel):
     department_id: int | None
 
 
-@router.get("/")
+@router.get("")
 async def get_employees(
     account_id: AccountID,
     conn: ConnectionTransaction,

@@ -6,11 +6,13 @@ import type { ReactNode } from "react"
 import { useAuth } from "./auth"
 
 export function ExpiredSessionToast() {
-  const navigate = useNavigate()
   const auth = useAuth()
+  const toast = useToast()
+  const navigate = useNavigate()
 
   function login() {
     auth.clearAuth()
+    toast.clear()
     navigate("/login")
   }
 

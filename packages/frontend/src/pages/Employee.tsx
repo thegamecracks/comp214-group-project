@@ -38,8 +38,8 @@ export default function Employee() {
 
   const name = employee.first_name ? `${employee.first_name} ${employee.last_name}` : employee.last_name
   return (
-    <div>
-      <h1 className="text-2xl font-bold">{name}</h1>
+    <div className="mx-8 my-4">
+      <h1 className="text-3xl font-bold">{name}</h1>
     </div>
   )
 }

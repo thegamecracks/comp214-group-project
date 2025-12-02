@@ -25,7 +25,7 @@ export default function Employees() {
   const [filter, setFilter] = useState<EmployeeFilter>({})
 
   useEffect(() => {
-    async function getEmployees() {
+    async function getData() {
       try {
         {
           const { data } = await auth.api.get("/departments", { signal })
@@ -46,7 +46,7 @@ export default function Employees() {
 
     const controller = new AbortController()
     const signal = controller.signal
-    getEmployees()
+    getData()
 
     return () => controller.abort()
   }, [])

@@ -3,7 +3,7 @@ import type { Employee } from "@/types"
 export function EmployeeList({ employees }: { employees: Employee[] }) {
   return (
     <div className="overflow-auto">
-      <table className="table">
+      <table className="table table-zebra">
         <thead>
           <tr>
             <th>#</th>

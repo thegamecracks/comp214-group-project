@@ -18,7 +18,6 @@ export function App() {
     <AuthContext value={new Auth(auth, setAuth)}>
       <BrowserRouter>
         <ToastContext value={new Toast(setToast)}>
-          {toast}
           <Routes>
             <Route element={<Frame />}>
               <Route element={<Protected />}>
@@ -27,6 +26,7 @@ export function App() {
               <Route path="/login" element={<Login />} />
             </Route>
           </Routes>
+          {toast}
         </ToastContext>
       </BrowserRouter>
     </AuthContext>

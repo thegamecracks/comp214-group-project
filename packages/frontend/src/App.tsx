@@ -8,7 +8,7 @@ import { Auth, AuthContext, useAuthData } from "./lib/auth"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Protected from "./components/Protected"
-import { Toast, ToastContext } from "./lib/Toast"
+import { Toast, ToastContext } from "./lib/toast"
 
 export function App() {
   const [auth, setAuth] = useAuthData()

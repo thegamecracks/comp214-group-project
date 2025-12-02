@@ -3,7 +3,7 @@ import { useNavigate } from "react-router"
 import type { FormEvent } from "react"
 
 import { useAuth } from "@/lib/auth"
-import { useToast } from "@/lib/Toast"
+import { useToast } from "@/lib/toast"
 
 function Login() {
   const auth = useAuth()

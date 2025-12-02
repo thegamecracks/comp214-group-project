@@ -1,16 +1,9 @@
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
 
 from backend.dependencies import AccountID, ConnectionTransaction
+from backend.models import Job
 
 router = APIRouter(prefix="/jobs")
-
-
-class Job(BaseModel):
-    job_id: str
-    job_title: str
-    min_salary: float
-    max_salary: float
 
 
 @router.get("")

@@ -1,25 +1,9 @@
-import datetime
-
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
 
 from backend.dependencies import AccountID, ConnectionTransaction
+from backend.models import Employee
 
 router = APIRouter(prefix="/employees")
-
-
-class Employee(BaseModel):
-    employee_id: int
-    first_name: str | None
-    last_name: str
-    email: str
-    phone_number: str | None
-    hire_date: datetime.date
-    job_id: str
-    salary: float | None
-    commission_pct: float | None
-    manager_id: int | None
-    department_id: int | None
 
 
 @router.get("")

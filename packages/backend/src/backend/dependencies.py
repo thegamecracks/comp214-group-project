@@ -7,14 +7,9 @@ import asyncpg
 import jwt
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from pydantic import BaseModel
 
 from backend import lifespan
-
-
-class AccountModel(BaseModel):
-    account_id: UUID
-    name: str
+from backend.models import AccountModel
 
 
 async def acquire() -> AsyncIterator[asyncpg.Connection]:

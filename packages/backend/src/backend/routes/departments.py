@@ -1,15 +1,9 @@
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
 
 from backend.dependencies import AccountID, ConnectionTransaction
+from backend.models import Department
 
 router = APIRouter(prefix="/departments")
-
-
-class Department(BaseModel):
-    department_id: int
-    manager_id: int | None
-    location_id: int
 
 
 @router.get("")

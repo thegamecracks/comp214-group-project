@@ -5,7 +5,7 @@ import { useAuth } from "@/lib/auth"
 import { useToast } from "@/lib/toast"
 import type { Employee } from "@/types"
 
-export default function Employee() {
+export default function EditEmployee() {
   const auth = useAuth()
   const toast = useToast()
   const { id } = useParams()

@@ -9,6 +9,7 @@
     "build": "bun run --env-file ../../.env build.ts --env 'BUN_PUBLIC_*' --public-path /"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "axios": "^1.13.2",
     "bun-plugin-tailwind": "^0.1.2",
     "daisyui": "^5.5.5",

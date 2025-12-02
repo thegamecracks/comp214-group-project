@@ -3,11 +3,10 @@ from fastapi import FastAPI
 from .dependencies import Account
 from .lifespan import lifespan
 from .middleware import add_middleware
-from .routes import auth, employees
+from .routes import include_routers
 
 app = FastAPI(lifespan=lifespan)
-app.include_router(auth.router)
-app.include_router(employees.router)
+include_routers(app)
 add_middleware(app)
 
 

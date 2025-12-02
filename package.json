@@ -4,6 +4,11 @@
   "workspaces": [
     "packages/frontend"
   ],
+  "scripts": {
+    "dev": "bun run --cwd packages/frontend dev",
+    "start": "bun run --cwd packages/frontend start",
+    "build": "bun run --cwd packages/frontend build"
+  },
   "devDependencies": {
     "frontend": "workspace:*"
   }

@@ -23,6 +23,7 @@ $$ LANGUAGE plpgsql;
 CREATE FUNCTION fn_employee_check_salary() RETURNS trigger AS $$
 BEGIN
     CALL check_salary(NEW.job_id, NEW.salary);
+    RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 

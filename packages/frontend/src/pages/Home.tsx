@@ -1,3 +1,4 @@
+import { PlusIcon } from "@heroicons/react/24/outline"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 
@@ -35,7 +36,11 @@ export default function Home() {
 
   return (
     <div className="mx-8 my-4">
-      <h1 className="text-3xl font-bold">Current Employees</h1>
+      <div className="flex">
+        <h1 className="text-3xl font-bold">Current Employees</h1>
+        <div className="flex-1" />
+        <button className="btn"><PlusIcon className="size-6" />Hire</button>
+      </div>
       <EmployeeList employees={employees} onSelect={showEmployee} />
     </div>
   )

@@ -27,10 +27,14 @@ export function Home() {
     return () => controller.abort()
   }, [auth])
 
+  function showEmployee(emp: Employee) {
+    toast.success(`Selected ${emp.last_name}`)
+  }
+
   return (
     <div className="mx-8 my-4">
       <h1 className="text-3xl font-bold">Current Employees</h1>
-      <EmployeeList employees={employees} />
+      <EmployeeList employees={employees} onSelect={showEmployee} />
     </div>
   )
 }

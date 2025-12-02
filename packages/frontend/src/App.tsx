@@ -5,7 +5,7 @@ import "./index.css"
 import Frame from "./components/Frame"
 import { Auth, AuthContext, useAuthData } from "./lib/auth"
 import EditEmployee from "./pages/EditEmployee"
-import Home from "./pages/Home"
+import Employees from "./pages/Employees"
 import Login from "./pages/Login"
 import Protected from "./components/Protected"
 
@@ -19,7 +19,7 @@ export function App() {
           <Routes>
             <Route element={<Frame />}>
               <Route element={<Protected />}>
-                <Route index element={<Home />} />
+                <Route index element={<Employees />} />
                 <Route path="/employees/:id" element={<EditEmployee />} />
               </Route>
               <Route path="/login" element={<Login />} />

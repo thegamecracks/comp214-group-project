@@ -15,7 +15,7 @@ type EmployeeFilter = {
   job?: Job
 }
 
-export default function Home() {
+export default function Employees() {
   const auth = useAuth()
   const navigate = useNavigate()
   const toast = useToast()

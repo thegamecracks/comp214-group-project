@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router"
 
 import Frame from "./components/Frame"
+import Departments from "./pages/Departments"
 import EditEmployee from "./pages/EditEmployee"
 import Employees from "./pages/Employees"
 import Login from "./pages/Login"
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
         Component: Protected,
         children: [
           { index: true, Component: Employees },
+          { path: "/departments", Component: Departments },
           { path: "/employees/:id", Component: EditEmployee },
         ],
       },

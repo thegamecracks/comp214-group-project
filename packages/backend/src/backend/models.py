@@ -35,5 +35,5 @@ class Job(BaseModel):
     job_id: str
     job_title: str
     job_description: str
-    min_salary: float
-    max_salary: float
+    min_salary: float | None
+    max_salary: float | None

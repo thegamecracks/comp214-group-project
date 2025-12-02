@@ -15,6 +15,7 @@ class Department(BaseModel):
     department_id: int
     manager_id: int | None
     location_id: int
+    name: str
 
 
 class Employee(BaseModel):

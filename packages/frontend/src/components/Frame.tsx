@@ -14,7 +14,7 @@ export function Frame() {
   return (
     <ToastContext value={new Toast(setToast)}>
       <nav className="navbar flex min-h-0 px-4 py-2 bg-base-100 shadow">
-        {loggedIn ? <Link to="/" className="btn btn-ghost text-xl" viewTransition>Employees</Link> : <></>}
+        {loggedIn ? <Link to="/employees" className="btn btn-ghost text-xl" viewTransition>Employees</Link> : <></>}
         {loggedIn ? <Link to="/departments" className="btn btn-ghost text-xl" viewTransition>Departments</Link> : <></>}
         {loggedIn ? <Link to="/jobs" className="btn btn-ghost text-xl" viewTransition>Jobs</Link> : <></>}
         <div className="flex-1" />

@@ -13,7 +13,7 @@ export function Frame() {
         <div className="flex-1" />
         {!loggedIn ? <Link to="/login" className="btn btn-ghost text-xl">Login</Link> : <></>}
         {!loggedIn ? <Link to="/login" className="btn btn-ghost text-xl">Register</Link> : <></>}
-        {loggedIn ? <button onClick={() => auth.clearAuth()} className="btn btn-ghost text-xl">Logout</button> : <></>}
+        {loggedIn ? <Link to="/login" onClick={() => auth.clearAuth()} className="btn btn-ghost text-xl">Logout</Link> : <></>}
       </nav>
       <Outlet />
     </>

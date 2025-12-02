@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router"
 import "./index.css"
 import Frame from "./components/Frame"
 import { Auth, AuthContext, useAuthData } from "./lib/auth"
+import Employee from "./pages/Employee"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Protected from "./components/Protected"
@@ -19,6 +20,7 @@ export function App() {
             <Route element={<Frame />}>
               <Route element={<Protected />}>
                 <Route index element={<Home />} />
+                <Route path="/employees/:id" element={<Employee />} />
               </Route>
               <Route path="/login" element={<Login />} />
             </Route>

@@ -1,4 +1,4 @@
-from asyncpg import RaiseError
+from asyncpg import PostgresError
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict
 
@@ -76,7 +76,7 @@ async def hire_employee(
             employee.manager_id,
             employee.department_id,
         )
-    except RaiseError as e:
+    except PostgresError as e:
         raise HTTPException(400, e.message)
 
     row = await conn.fetchrow("SELECT * FROM employee WHERE email = $1", employee.email)
@@ -105,7 +105,7 @@ async def edit_employee(
             data.salary,
             employee_id,
         )
-    except RaiseError as e:
+    except PostgresError as e:
         raise HTTPException(400, e.message)
 
     if row is None:

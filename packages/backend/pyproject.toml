@@ -1,7 +1,3 @@
-[build-system]
-requires = ["uv-build~=0.9.8"]
-build-backend = "uv_build"
-
 [project]
 name = "backend"
 version = "1.0.0"

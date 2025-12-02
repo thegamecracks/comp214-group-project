@@ -7,7 +7,7 @@ export function Frame() {
   const loggedIn = auth.isAuthenticated()
 
   return (
-    <div>
+    <>
       <nav className="navbar flex">
         {loggedIn ? <Link to="/" className="btn btn-ghost text-xl">Home</Link> : <></>}
         <div className="flex-1" />
@@ -16,7 +16,7 @@ export function Frame() {
         {loggedIn ? <button onClick={() => auth.clearAuth()} className="btn btn-ghost text-xl">Logout</button> : <></>}
       </nav>
       <Outlet />
-    </div>
+    </>
   )
 }
 

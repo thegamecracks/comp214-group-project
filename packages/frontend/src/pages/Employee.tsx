@@ -28,7 +28,7 @@ export default function Employee() {
     getEmployee()
 
     return () => controller.abort()
-  }, [auth])
+  }, [])
 
   if (!employee) return (
     <div className="h-svh flex items-center justify-center">

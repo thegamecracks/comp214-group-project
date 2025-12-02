@@ -5,12 +5,12 @@ import type { AxiosError, AxiosInstance, AxiosResponse } from "axios"
 const BASE_URL = `${process.env.BUN_PUBLIC_API}`
 const SUB_KEY = "sub"
 const ACCESS_TOKEN_KEY = "accessToken"
-// const REFRESH_TOKEN_KEY = "refreshToken"
+const REFRESH_TOKEN_KEY = "refreshToken"
 
 export type AuthData = {
   sub: string
   accessToken: string
-  // refreshToken: string
+  refreshToken: string
 }
 
 export class Auth {
@@ -34,7 +34,6 @@ export class Auth {
     })
 
     // https://stackoverflow.com/a/71412207
-    /*
     this.client.interceptors.response.use(res => res, (error: AxiosError) => {
       const { response, config } = error
       if (!response || !config) return Promise.reject(error)
@@ -42,14 +41,14 @@ export class Auth {
       if (!this.isAuthenticated()) return Promise.reject(error)
 
       console.log("Access token refused, refreshing token")
-      return axios.post(`${config.baseURL}/refresh`, undefined, {
-        timeout: config.timeout,
-        headers: { Authorization: this.data.refreshToken },
-
-      }).then((res: AxiosResponse) => {
+      return axios.post(
+        `${config.baseURL}/auth/token/refresh`,
+        { refresh_token: this.data.refreshToken },
+        { timeout: config.timeout }
+      ).then((res: AxiosResponse) => {
         console.log("Successfully refreshed, retrying last request")
         this.saveAuthFromResponse(res)
-        config.headers.set("Authorization", `${res.data.tokenType} ${res.data.accessToken}`)
+        config.headers.set("Authorization", `${res.data.token_type} ${res.data.access_token}`)
         return axios.request(config)
 
       }).catch((_err: AxiosError) => {
@@ -58,7 +57,6 @@ export class Auth {
         return Promise.reject(error)
       })
     })
-    */
   }
 
   /**
@@ -76,7 +74,7 @@ export class Auth {
   saveAuth(data: AuthData) {
     localStorage.setItem(SUB_KEY, data.sub)
     localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken)
-    // localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken)
+    localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken)
     this.setData(data)
   }
 
@@ -84,15 +82,15 @@ export class Auth {
     this.saveAuth({
       sub: res.data.sub,
       accessToken: `${res.data.token_type} ${res.data.access_token}`,
-      // refreshToken: `${res.data.token_type} ${res.data.refresh_token}`,
+      refreshToken: res.data.refresh_token,
     })
   }
 
   clearAuth() {
     localStorage.removeItem(SUB_KEY)
     localStorage.removeItem(ACCESS_TOKEN_KEY)
-    // localStorage.removeItem(REFRESH_TOKEN_KEY)
-    this.setData({ sub: "", accessToken: "" })
+    localStorage.removeItem(REFRESH_TOKEN_KEY)
+    this.setData({ sub: "", accessToken: "", refreshToken: "" })
   }
 
   isAuthenticated() {
@@ -104,5 +102,5 @@ export const useAuth = () => useContext(AuthContext)!
 export const useAuthData = () => useState<AuthData>({
   sub: localStorage.getItem(SUB_KEY) || "",
   accessToken: localStorage.getItem(ACCESS_TOKEN_KEY) || "",
-  // refreshToken: localStorage.getItem(REFRESH_TOKEN_KEY) || "",
+  refreshToken: localStorage.getItem(REFRESH_TOKEN_KEY) || "",
 })

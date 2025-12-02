@@ -28,7 +28,7 @@ export default function Home() {
     getEmployees()
 
     return () => controller.abort()
-  }, [auth])
+  }, [])
 
   function showEmployee(employee: Employee) {
     navigate(`/employees/${employee.employee_id}`, { state: { employee } })

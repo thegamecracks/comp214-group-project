@@ -3,15 +3,15 @@ import { BrowserRouter, Route, Routes } from "react-router"
 
 import "./index.css"
 import Frame from "./components/Frame"
-import { Auth, AuthContext } from "./lib/auth"
+import { Auth, AuthContext, useAuthData } from "./lib/auth"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 
 export function App() {
-  const [token, setToken] = useState("")
+  const [auth, setAuth] = useAuthData()
 
   return (
-    <AuthContext value={new Auth(token, setToken)}>
+    <AuthContext value={new Auth(auth, setAuth)}>
       <BrowserRouter>
         <Routes>
           <Route element={<Frame />}>

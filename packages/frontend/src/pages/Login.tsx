@@ -1,12 +1,12 @@
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router"
 import type { FormEvent } from "react"
 
-import { AuthContext } from "@/lib/auth"
+import { useAuth } from "@/lib/auth"
 import axios from "axios"
 
 function Login() {
-  const auth = useContext(AuthContext)!
+  const auth = useAuth()
   const [error, setError] = useState("")
   const navigate = useNavigate()
 
@@ -14,8 +14,8 @@ function Login() {
     e.preventDefault()
 
     try {
-      const { data } = await auth.client.post("/auth/token", e.target)
-      auth.setToken(`${data.token_type} ${data.access_token}`)
+      const res = await auth.client.post("/auth/token", e.target)
+      auth.saveAuthFromResponse(res)
       navigate("/", { replace: true })
     } catch (error) {
       if (!axios.isAxiosError(error)) setError(String(error))

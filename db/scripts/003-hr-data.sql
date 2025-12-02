@@ -6,6 +6,7 @@ INSERT INTO region (region_id, name) VALUES
 	 (2,'Americas'),
 	 (3,'Asia'),
 	 (4,'Middle East and Africa');
+ALTER SEQUENCE department_department_id_seq RESTART WITH 5;
 INSERT INTO country (country_id, name, region_id) VALUES
 	 ('AR','Argentina',2),
 	 ('AU','Australia',3),
@@ -56,6 +57,7 @@ INSERT INTO location (location_id, street_address, postal_code, city, state_prov
 	 (3000,'Murtenstrasse 921','3095','Bern','BE','CH'),
 	 (3100,'Pieter Breughelstraat 837','3029SK','Utrecht','Utrecht','NL'),
 	 (3200,'Mariano Escobedo 9991','11932','Mexico City','Distrito Federal,','MX');
+ALTER SEQUENCE location_location_id_seq RESTART WITH 3300 INCREMENT BY 100;
 INSERT INTO department (department_id, name, manager_id, location_id) VALUES
 	 (10,'Administration',200,1700),
 	 (20,'Marketing',201,1800),
@@ -84,6 +86,7 @@ INSERT INTO department (department_id, name, manager_id, location_id) VALUES
 	 (250,'Retail Sales',NULL,1700),
 	 (260,'Recruiting',NULL,1700),
 	 (270,'Payroll',NULL,1700);
+ALTER SEQUENCE department_department_id_seq RESTART WITH 280 INCREMENT BY 10;
 INSERT INTO employee (employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary, commission_pct, manager_id, department_id) VALUES
 	 (100,'Steven','King','SKING','515.123.4567', DATE'1987-06-17','AD_PRES',24000,NULL,NULL,90),
 	 (101,'Neena','Kochhar','NKOCHHAR','515.123.4568', DATE'1989-09-21','AD_VP',17000,NULL,100,90),
@@ -192,6 +195,7 @@ INSERT INTO employee (employee_id, first_name, last_name, email, phone_number, h
 	 (204,'Hermann','Baer','HBAER','515.123.8888', DATE'1994-06-07','PR_REP',10000,NULL,101,70),
 	 (205,'Shelley','Higgins','SHIGGINS','515.123.8080', DATE'1994-06-07','AC_MGR',12000,NULL,101,110),
 	 (206,'William','Gietz','WGIETZ','515.123.8181', DATE'1994-06-07','AC_ACCOUNT',8300,NULL,205,110);
+ALTER SEQUENCE employee_employee_id_seq RESTART WITH 207;
 INSERT INTO job_history (employee_id, start_date, end_date, job_id, department_id) VALUES
 	 (102,DATE'1993-01-13',DATE'1998-07-24','IT_PROG',60),
 	 (101,DATE'1989-09-21',DATE'1993-10-27','AC_ACCOUNT',110),

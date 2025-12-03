@@ -23,7 +23,7 @@ def add_middleware(app: FastAPI) -> None:
         authenticate=_ratelimit_authenticate,
         backend=MemoryBackend(),
         config={
-            r"^/": [Rule(minute=60)],
+            r"^/": [Rule(minute=180)],
         },
     )
 

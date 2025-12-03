@@ -35,44 +35,44 @@ export default function EmployeeForm({
   return (
     <form onSubmit={e => e.preventDefault()} className="h-[90svh] mx-8 my-4 flex flex-col gap-4">
       <h1 className="text-3xl font-bold">{formatEmployee(state, { departments, employees, jobs })}</h1>
-      <fieldset className="grid grid-cols-3 gap-4">
+      <fieldset className="grid grid-cols-3 gap-4 justify-items-stretch">
         {mode === "edit" && (
-          <label className="input input-lg validator">
+          <label className="input input-lg validator w-full">
             <span className="label">Employee ID</span>
             <input type="number" value={state.employee_id} onChange={e => dispatch(["employee_id", e.target.value])}
               disabled
             />
           </label>
         )}
-        <label className="input input-lg validator">
+        <label className="input input-lg validator w-full">
           <span className="label">First Name</span>
           <input type="text" value={state.first_name || ""} onChange={e => dispatch(["first_name", e.target.value])}
             disabled={mode !== "hire"}
           />
         </label>
-        <label className="input input-lg validator">
+        <label className="input input-lg validator w-full">
           <span className="label">Last Name</span>
           <input type="text" value={state.last_name} onChange={e => dispatch(["last_name", e.target.value])}
             disabled={mode !== "hire"}
           />
         </label>
-        <label className="input input-lg validator">
+        <label className="input input-lg validator w-full">
           <span className="label">Email</span>
           <input type="text" value={state.email} onChange={e => dispatch(["email", e.target.value])} />
         </label>
-        <label className="input input-lg validator">
+        <label className="input input-lg validator w-full">
           <span className="label">Phone Number</span>
           <input type="text" value={state.phone_number || ""} onChange={e => dispatch(["phone_number", e.target.value])} />
         </label>
         {mode === "edit" && (
-          <label className="input input-lg validator">
+          <label className="input input-lg validator w-full">
             <span className="label">Hire Date</span>
             <input type="date" value={state.hire_date} onChange={e => dispatch(["hire_date", e.target.value])}
               disabled
             />
           </label>
         )}
-        <label className="select select-lg">
+        <label className="select select-lg w-full">
           <span className="label">Job</span>
           <select defaultValue={state.job_id} onChange={e => dispatch(["job_id", e.target.value])}
             disabled={mode !== "hire"}
@@ -82,19 +82,19 @@ export default function EmployeeForm({
             ))}
           </select>
         </label>
-        <label className="input input-lg validator">
+        <label className="input input-lg validator w-full">
           <span className="label">Salary ($)</span>
           <input type="number" value={state.salary || ""} onChange={e => dispatch(["salary", e.target.value])} />
         </label>
         {mode === "edit" && (
-          <label className="input input-lg validator">
+          <label className="input input-lg validator w-full">
             <span className="label">Commission</span>
             <input type="text" value={state.commission_pct || ""} onChange={e => dispatch(["commission_pct", e.target.value])}
               disabled
             />
           </label>
         )}
-        <label className="select select-lg">
+        <label className="select select-lg w-full">
           <span className="label">Manager</span>
           <select defaultValue={state.manager_id || ""} onChange={e => dispatch(["manager_id", e.target.value])}
             disabled={mode !== "hire"}
@@ -105,7 +105,7 @@ export default function EmployeeForm({
             ))}
           </select>
         </label>
-        <label className="select select-lg">
+        <label className="select select-lg w-full">
           <span className="label">Department</span>
           <select defaultValue={state.department_id || ""} onChange={e => dispatch(["department_id", e.target.value])}
             disabled={mode !== "hire"}

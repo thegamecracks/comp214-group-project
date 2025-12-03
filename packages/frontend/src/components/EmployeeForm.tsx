@@ -78,6 +78,7 @@ export default function EmployeeForm({
           <select defaultValue={state.job_id} onChange={e => dispatch(["job_id", e.target.value])}
             disabled={mode !== "hire"}
           >
+            <option value=""></option>
             {jobs.map(job => (
               <option key={job.job_id} value={job.job_id}>{job.job_title}</option>
             ))}
@@ -133,7 +134,7 @@ export default function EmployeeForm({
 function useEmployeeReducer(selected: Employee) {
   function reducer(state: Employee, [key, value]: [keyof Employee, Employee[keyof Employee]] | ["", Employee]) {
     if (key === "") return { ...value }
-    const nullable: (keyof Employee)[] = ["first_name", "phone_number", "salary", "commission_pct", "manager_id", "department_id"]
+    const nullable: (keyof Employee)[] = ["first_name", "phone_number", "job_id", "salary", "commission_pct", "manager_id", "department_id"]
     const numeric: (keyof Employee)[] = ["employee_id", "salary", "commission_pct", "manager_id", "department_id"]
     if (nullable.includes(key) && !value) value = null
     if (numeric.includes(key) && value !== "") value = Number(value)

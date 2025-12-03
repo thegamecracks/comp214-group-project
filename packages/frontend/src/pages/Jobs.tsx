@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router"
+import { PlusIcon } from "@heroicons/react/24/outline"
+import { Link, useNavigate } from "react-router"
 
 import Banner from "@/components/Banner"
 import LoadingPage from "@/components/LoadingPage"
@@ -20,6 +21,8 @@ export default function Jobs() {
     <div className="mx-8 my-4 h-[90svh] flex flex-col">
       <Banner>
         <h1 className="text-xl font-bold">Jobs</h1>
+          <div className="flex-1" />
+          <Link to="/jobs/new" className="btn" viewTransition><PlusIcon className="size-6" />New</Link>
       </Banner>
       <JobList jobs={jobs} onSelect={showJob} />
     </div>

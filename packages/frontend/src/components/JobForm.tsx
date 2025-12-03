@@ -33,22 +33,22 @@ export default function JobForm({
         <p className="text-lg">{state.job_description}</p>
       </div>
       <fieldset className="grid grid-cols-3 gap-4 justify-items-stretch">
-        {mode === "edit" && (
-          <label className="input input-lg validator w-full">
-            <span className="label">Job ID</span>
-            <input type="number" value={state.job_id} onChange={e => dispatch(["job_id", e.target.value])}
-              disabled
-            />
-          </label>
-        )}
+        <label className="input input-lg validator w-full">
+          <span className="label">Job ID</span>
+          <input type="text" value={state.job_id} onChange={e => dispatch(["job_id", e.target.value])}
+            disabled={mode !== "new"}
+          />
+        </label>
         <label className="input input-lg validator w-full">
           <span className="label">Title</span>
           <input type="text" value={state.job_title || ""} onChange={e => dispatch(["job_title", e.target.value])} />
         </label>
-        <label className="input input-lg validator w-full">
-          <span className="label">Description</span>
-          <input type="text" value={state.job_description || ""} onChange={e => dispatch(["job_description", e.target.value])} />
-        </label>
+        {mode === "edit" && (
+          <label className="input input-lg validator w-full">
+            <span className="label">Description</span>
+            <input type="text" value={state.job_description || ""} onChange={e => dispatch(["job_description", e.target.value])} />
+          </label>
+        )}
         <label className="input input-lg validator w-full">
           <span className="label">Min Salary ($)</span>
           <input type="number" value={state.min_salary || ""} onChange={e => dispatch(["min_salary", e.target.value])} />

@@ -1,34 +1,13 @@
 import { useEffect, useState } from "react"
-import { useLocation, useParams } from "react-router"
+import { useParams } from "react-router"
 
 import { useAuth } from "@/lib/auth"
 import { useToast } from "@/lib/toast"
-import type { Employee } from "@/types"
+import type { Department, Employee, Job } from "@/types"
 
 export default function EditEmployee() {
-  const auth = useAuth()
-  const toast = useToast()
   const { id } = useParams()
-  const { state } = useLocation()
-  const [employee, setEmployee] = useState<Employee | null>(state?.employee || null)
-
-  useEffect(() => {
-    async function getEmployee() {
-      try {
-        const { data } = await auth.api.get(`/employees/${id}`, { signal })
-        setEmployee(data)
-      } catch (error) {
-        toast.error(error)
-      }
-    }
-
-    if (employee) return;
-    const controller = new AbortController()
-    const signal = controller.signal
-    getEmployee()
-
-    return () => controller.abort()
-  }, [])
+  const { department, employee, job } = useEmployee(id!)
 
   if (!employee) return (
     <div className="h-[90svh] flex items-center justify-center">
@@ -42,4 +21,44 @@ export default function EditEmployee() {
       <h1 className="text-3xl font-bold">{name}</h1>
     </div>
   )
+}
+
+function useEmployee(employee_id: string) {
+  const auth = useAuth()
+  const toast = useToast()
+  const [department, setDepartment] = useState<Department | null>(null)
+  const [employee, setEmployee] = useState<Employee | null>(null)
+  const [job, setJob] = useState<Job | null>(null)
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const { data } = await auth.api.get(`/employees/${employee_id}`, { signal })
+        setEmployee(data)
+
+        const { department_id } = data
+        if (department_id) {
+          const { data } = await auth.api.get(`/departments/${department_id}`, { signal })
+          setDepartment(data)
+        }
+
+        const { job_id } = data
+        if (job_id) {
+          const { data } = await auth.api.get(`/jobs/${job_id}`, { signal })
+          setJob(data)
+        }
+      } catch (error) {
+        toast.error(error)
+      }
+    }
+
+    if (employee) return;
+    const controller = new AbortController()
+    const signal = controller.signal
+    getData()
+
+    return () => controller.abort()
+  }, [])
+
+  return { department, employee, job }
 }

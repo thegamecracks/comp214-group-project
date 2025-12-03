@@ -1,16 +1,17 @@
-import { PlusIcon } from "@heroicons/react/24/outline"
+import { MagnifyingGlassIcon, PlusIcon } from "@heroicons/react/24/outline"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router"
 
 import Banner from "@/components/Banner"
 import LoadingPage from "@/components/LoadingPage"
 import Table from "@/components/Table"
-import { useDepartments, useEmployees, useJobs } from "@/lib/state"
+import { formatEmployee, useDepartments, useEmployees, useJobs } from "@/lib/state"
 import type { Department, Employee, Job } from "@/types"
 
 type EmployeeFilter = {
   department?: Department
   job?: Job
+  search: string
 }
 
 export default function Employees() {
@@ -18,7 +19,7 @@ export default function Employees() {
   const [departments] = useDepartments()
   const [employees] = useEmployees()
   const [jobs] = useJobs()
-  const [filter, setFilter] = useState<EmployeeFilter>({})
+  const [filter, setFilter] = useState<EmployeeFilter>({ search: "" })
 
   if (!departments || !employees || !jobs) return <LoadingPage />
 
@@ -32,6 +33,10 @@ export default function Employees() {
     else setFilter({ ...filter, job: undefined })
   }
 
+  function setSearch(search: string) {
+    setFilter({ ...filter, search })
+  }
+
   function showEmployee(employee: Employee) {
     navigate(`/employees/${employee.employee_id}`, { viewTransition: true })
   }
@@ -39,7 +44,11 @@ export default function Employees() {
   const filteredEmployees = employees.filter(emp => {
     if (filter.department && emp.department_id !== filter.department.department_id) return false
     if (filter.job && emp.job_id !== filter.job.job_id) return false
-    return true
+    if (!filter.search) return true
+    if (String(emp.employee_id).includes(filter.search.toLowerCase())) return true
+    if (formatEmployee(emp).toLowerCase().includes(filter.search.toLowerCase())) return true
+    if (emp.email.toLowerCase().includes(filter.search.toLowerCase())) return true
+    return false
   })
   filteredEmployees.sort((a, b) => b.employee_id - a.employee_id)
 
@@ -55,6 +64,10 @@ export default function Employees() {
         <Banner>
           <h1 className="text-2xl font-bold">Current Employees</h1>
           <div className="flex-1" />
+          <label className="input">
+            <input value={filter.search} onChange={e => setSearch(e.target.value)} placeholder="Filter" />
+            <MagnifyingGlassIcon className="size-6" />
+          </label>
           <Link to="/employees/hire" className="btn" viewTransition><PlusIcon className="size-6" />Hire</Link>
         </Banner>
         <EmployeeList employees={filteredEmployees} selected={[]} onSelect={showEmployee} />

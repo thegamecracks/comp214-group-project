@@ -9,10 +9,10 @@ export function formatEmployee(selected: Employee, {
   employees = [],
   jobs = [],
 }: {
-  departments: Department[];
-  employees: Employee[];
-  jobs: Job[];
-}) {
+  departments?: Department[];
+  employees?: Employee[];
+  jobs?: Job[];
+} = {}) {
   let name = selected.last_name
   if (selected.first_name) name = `${selected.first_name} ${name}`
 

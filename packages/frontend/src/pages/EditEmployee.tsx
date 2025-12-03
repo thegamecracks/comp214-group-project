@@ -8,7 +8,7 @@ import type { Department, Employee, Job } from "@/types"
 
 export default function EditEmployee() {
   const { id } = useParams()
-  const { department, employee, job } = useEmployee(id!)
+  const { department, employee, job, manager } = useEmployee(id!)
   const [email, setEmail] = useState(employee?.email || "")
   const [phoneNumber, setPhoneNumber] = useState(employee?.phone_number || "")
   const [salary, setSalary] = useState(String(employee?.salary ?? ""))
@@ -36,6 +36,9 @@ export default function EditEmployee() {
   let name = employee.last_name
   if (employee.first_name) name = `${employee.first_name} ${name}`
   if (job) name = `${name}, ${job.job_title}`
+
+  let managerName = manager?.last_name ?? ""
+  if (manager?.first_name) managerName = `${manager.first_name} ${managerName}`
 
   return (
     <form onSubmit={editEmployee} className="h-[90svh] mx-8 my-4 flex flex-col gap-4">
@@ -79,7 +82,7 @@ export default function EditEmployee() {
         </label>
         <label className="input input-lg validator">
           <span className="label">Manager</span>
-          <input type="text" value={employee.manager_id || ""} disabled />
+          <input type="text" value={managerName} disabled />
         </label>
         <label className="input input-lg validator">
           <span className="label">Department</span>
@@ -101,6 +104,7 @@ function useEmployee(employee_id: string) {
   const [department, setDepartment] = useState<Department | null>(null)
   const [employee, setEmployee] = useState<Employee | null>(null)
   const [job, setJob] = useState<Job | null>(null)
+  const [manager, setManager] = useState<Employee | null>(null)
 
   useEffect(() => {
     async function getData() {
@@ -119,6 +123,12 @@ function useEmployee(employee_id: string) {
           const { data } = await auth.api.get(`/jobs/${job_id}`, { signal })
           setJob(data)
         }
+
+        const { manager_id } = data
+        if (manager_id) {
+          const { data } = await auth.api.get(`/employees/${manager_id}`, { signal })
+          setManager(data)
+        }
       } catch (error) {
         toast.error(error)
       }
@@ -132,5 +142,5 @@ function useEmployee(employee_id: string) {
     return () => controller.abort()
   }, [])
 
-  return { department, employee, job }
+  return { department, employee, job, manager }
 }

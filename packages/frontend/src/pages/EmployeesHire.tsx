@@ -1,11 +1,15 @@
-import { useNavigate, useParams } from "react-router"
+import { useNavigate } from "react-router"
 
 import EmployeeForm from "@/components/EmployeeForm"
+import { useAuth } from "@/lib/auth"
 import { useDepartments, useEmployees, useJobs } from "@/lib/state"
+import { useToast } from "@/lib/toast"
 import type { Employee } from "@/types"
 
 export default function EmployeesHire() {
   const navigate = useNavigate()
+  const auth = useAuth()
+  const toast = useToast()
   const [departments] = useDepartments()
   const [employees] = useEmployees()
   const [jobs] = useJobs()
@@ -30,8 +34,15 @@ export default function EmployeesHire() {
     department_id: null,
   }
 
-  async function onSubmit(e: Employee) {
-    console.log(e)
+  async function onSubmit(emp: Employee) {
+    const payload = { ...emp, employee_id: undefined, hire_date: undefined, commission_pct: undefined }
+    try {
+      const { data } = await auth.api.post("/employees", payload)
+      toast.success("Successfully hired employee!")
+      navigate(`/employees/${data.employee_id}`, { viewTransition: true })
+    } catch (error) {
+      toast.error(error)
+    }
   }
 
   function onCancel() {

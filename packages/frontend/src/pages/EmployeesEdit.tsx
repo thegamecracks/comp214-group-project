@@ -1,14 +1,18 @@
 import { useNavigate, useParams } from "react-router"
 
 import EmployeeForm from "@/components/EmployeeForm"
+import { useAuth } from "@/lib/auth"
 import { useDepartments, useEmployees, useJobs } from "@/lib/state"
+import { useToast } from "@/lib/toast"
 import type { Employee } from "@/types"
 
 export default function EmployeesEdit() {
   const navigate = useNavigate()
   const { id } = useParams()
+  const auth = useAuth()
+  const toast = useToast()
   const [departments] = useDepartments()
-  const [employees] = useEmployees()
+  const [employees, setEmployees] = useEmployees()
   const [jobs] = useJobs()
 
   if (!id) return (
@@ -30,8 +34,15 @@ export default function EmployeesEdit() {
     </div>
   )
 
-  async function onSubmit(e: Employee) {
-    console.log(e)
+  async function onSubmit(emp: Employee) {
+    const payload = { email: emp.email, phone_number: emp.phone_number, salary: emp.salary }
+    try {
+      const { data } = await auth.api.patch(`/employees/${emp.employee_id}`, payload)
+      toast.success("Successfully updated employee!")
+      setEmployees(employees.map(emp => emp.employee_id === data.employee_id ? data : emp ))
+    } catch (error) {
+      toast.error(error)
+    }
   }
 
   function onCancel() {

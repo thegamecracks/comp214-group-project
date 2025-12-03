@@ -52,11 +52,13 @@ export default function Employees() {
   }, [])
 
   function filterByDepartment(department: Department) {
-    setFilter({ ...filter, department })
+    if (filter.department?.department_id !== department.department_id) setFilter({ ...filter, department })
+    else setFilter({ ...filter, department: undefined })
   }
 
   function filterByJob(job: Job) {
-    setFilter({ ...filter, job })
+    if (filter.job?.job_id !== job.job_id) setFilter({ ...filter, job })
+    else setFilter({ ...filter, job: undefined })
   }
 
   function showEmployee(employee: Employee) {

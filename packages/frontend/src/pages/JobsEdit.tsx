@@ -12,7 +12,7 @@ export default function EmployeesEdit() {
   const { id } = useParams()
   const auth = useAuth()
   const toast = useToast()
-  const { job } = useJob(id!)
+  const [job, setJob] = useJob(id!)
 
   if (!job) return <LoadingPage />
 
@@ -21,6 +21,7 @@ export default function EmployeesEdit() {
     try {
       const { data } = await auth.api.patch(`/jobs/${job.job_id}`, payload)
       toast.success("Successfully updated job!")
+      setJob(data)
     } catch (error) {
       toast.error(error)
     }

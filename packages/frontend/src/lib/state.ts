@@ -158,7 +158,8 @@ export function useEmployee(employee_id: string) {
 export function useJob(job_id: string) {
   const auth = useAuth()
   const toast = useToast()
-  const [job, setJob] = useState<Job | null>(null)
+  const state = useState<Job | null>(null)
+  const [job, setJob] = state
 
   useEffect(() => {
     async function getData() {
@@ -170,6 +171,7 @@ export function useJob(job_id: string) {
       }
     }
 
+    if (job) return;
     const controller = new AbortController()
     const signal = controller.signal
     getData()
@@ -177,5 +179,5 @@ export function useJob(job_id: string) {
     return () => controller.abort()
   }, [])
 
-  return { job }
+  return state
 }

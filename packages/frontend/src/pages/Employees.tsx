@@ -38,6 +38,7 @@ export default function Employees() {
     if (filter.job && emp.job_id !== filter.job.job_id) return false
     return true
   })
+  filteredEmployees.sort((a, b) => b.employee_id - a.employee_id)
 
   return (
     <div className="mx-8 my-4 h-[90svh] grid grid-flow-col grid-cols-5 grid-rows-3 gap-4">

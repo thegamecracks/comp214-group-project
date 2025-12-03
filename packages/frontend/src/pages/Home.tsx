@@ -3,7 +3,7 @@ import { useNavigate, useViewTransitionState } from "react-router"
 
 import { useAuth } from "@/lib/auth"
 
-export function Home() {
+export default function Home() {
   const auth = useAuth()
   const navigate = useNavigate()
   const inTransition = useViewTransitionState("/")
@@ -17,5 +17,3 @@ export function Home() {
 
   return <></>
 }
-
-export default Home

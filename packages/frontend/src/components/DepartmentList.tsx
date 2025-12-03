@@ -1,6 +1,6 @@
 import type { Department } from "@/types"
 
-export function DepartmentList({
+export default function DepartmentList({
   departments,
   onSelect,
 }: {
@@ -28,5 +28,3 @@ export function DepartmentList({
     </div>
   )
 }
-
-export default DepartmentList

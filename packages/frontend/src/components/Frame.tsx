@@ -5,7 +5,7 @@ import type { ReactNode } from "react"
 import { useAuth } from "@/lib/auth"
 import { Toast, ToastContext } from "@/lib/toast"
 
-export function Frame() {
+export default function Frame() {
   const auth = useAuth()
   const [toast, setToast] = useState<ReactNode | null>(null)
 
@@ -27,5 +27,3 @@ export function Frame() {
     </ToastContext>
   )
 }
-
-export default Frame

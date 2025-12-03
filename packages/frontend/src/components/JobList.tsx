@@ -1,6 +1,6 @@
 import type { Job } from "@/types"
 
-export function JobList({
+export default function JobList({
   jobs,
   onSelect,
 }: {
@@ -28,5 +28,3 @@ export function JobList({
     </div>
   )
 }
-
-export default JobList

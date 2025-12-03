@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router"
 
 import { useAuth } from "@/lib/auth"
 
-export function Protected() {
+export default function Protected() {
   const auth = useAuth()
   if (auth.isAuthenticated()) return <Outlet />
 
@@ -16,5 +16,3 @@ export function Protected() {
     </div>
   )
 }
-
-export default Protected

@@ -1,6 +1,6 @@
 import type { Employee } from "@/types"
 
-export function EmployeeList({
+export default function EmployeeList({
   employees,
   onSelect,
 }: {
@@ -30,5 +30,3 @@ export function EmployeeList({
     </div>
   )
 }
-
-export default EmployeeList

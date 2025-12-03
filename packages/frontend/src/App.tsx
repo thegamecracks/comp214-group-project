@@ -5,7 +5,7 @@ import "./index.css"
 import { Auth, AuthContext, useAuthData } from "./lib/auth"
 import router from "./Router"
 
-export function App() {
+export default function App() {
   const [auth, setAuth] = useAuthData()
 
   return (
@@ -16,5 +16,3 @@ export function App() {
     </StrictMode>
   )
 }
-
-export default App

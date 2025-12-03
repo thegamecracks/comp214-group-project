@@ -10,7 +10,7 @@
 
 1. Install [Docker Desktop](https://docs.docker.com/get-started/get-docker/)
    or [Podman](https://podman.io/docs/installation)
-2. Copy the `env.example` file to `.env`, and adjust environment variables accordingly
+2. Copy the `env.example` file to `.env`, and optionally adjust environment variables
 3. Copy the `postgresql.conf.example` file to `postgresql.conf`
 4. Run the project:
 

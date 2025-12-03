@@ -45,7 +45,7 @@ export default function Employees() {
         <Banner>
           <h1 className="text-xl font-bold">Filter by department</h1>
         </Banner>
-        <DepartmentList departments={departments} onSelect={filterByDepartment} />
+        <DepartmentList departments={departments} selected={[filter.department?.department_id]} onSelect={filterByDepartment} />
       </section>
       <section className="row-span-2 col-span-4 overflow-auto shadow rounded">
         <Banner>
@@ -53,13 +53,13 @@ export default function Employees() {
           <div className="flex-1" />
           <button className="btn"><PlusIcon className="size-6" />Hire</button>
         </Banner>
-        <EmployeeList employees={filteredEmployees} onSelect={showEmployee} />
+        <EmployeeList employees={filteredEmployees} selected={[]} onSelect={showEmployee} />
       </section>
       <section className="row-span-1 col-span-4 overflow-auto shadow rounded">
         <Banner>
           <h1 className="text-xl font-bold">Filter by job</h1>
         </Banner>
-        <JobList jobs={jobs} onSelect={filterByJob} />
+        <JobList jobs={jobs} selected={[filter.job?.job_id]} onSelect={filterByJob} />
       </section>
     </div>
   )
@@ -67,9 +67,11 @@ export default function Employees() {
 
 function DepartmentList({
   departments,
+  selected,
   onSelect,
 }: {
   departments: Department[];
+  selected: (Department["department_id"] | undefined)[];
   onSelect: (emp: Department) => void;
 }) {
   return (
@@ -82,7 +84,7 @@ function DepartmentList({
       </thead>
       <tbody>
         {departments.map(dep => (
-          <tr key={dep.department_id} onClick={() => onSelect(dep)} className="hover:bg-base-300 transition-colors">
+          <tr key={dep.department_id} onClick={() => onSelect(dep)} className={rowStyle(selected.includes(dep.department_id))}>
             <th>{dep.department_id}</th>
             <td>{dep.name}</td>
           </tr>
@@ -94,9 +96,11 @@ function DepartmentList({
 
 function EmployeeList({
   employees,
+  selected,
   onSelect,
 }: {
   employees: Employee[];
+  selected: (Employee["employee_id"] | undefined)[];
   onSelect: (emp: Employee) => void;
 }) {
   return (
@@ -110,7 +114,7 @@ function EmployeeList({
       </thead>
       <tbody>
         {employees.map(emp => (
-          <tr key={emp.employee_id} onClick={() => onSelect(emp)} className="hover:bg-base-300 transition-colors">
+          <tr key={emp.employee_id} onClick={() => onSelect(emp)} className={rowStyle(selected.includes(emp.employee_id))}>
             <th>{emp.employee_id}</th>
             <td>{emp.first_name ? `${emp.first_name} ${emp.last_name}` : emp.last_name}</td>
             <td>{emp.email}</td>
@@ -123,9 +127,11 @@ function EmployeeList({
 
 function JobList({
   jobs,
+  selected,
   onSelect,
 }: {
   jobs: Job[];
+  selected: (Job["job_id"] | undefined)[];
   onSelect: (emp: Job) => void;
 }) {
   return (
@@ -138,7 +144,7 @@ function JobList({
       </thead>
       <tbody>
         {jobs.map(job => (
-          <tr key={job.job_id} onClick={() => onSelect(job)} className="hover:bg-base-300 transition-colors">
+          <tr key={job.job_id} onClick={() => onSelect(job)} className={rowStyle(selected.includes(job.job_id))}>
             <th>{job.job_id}</th>
             <td>{job.job_title}</td>
           </tr>
@@ -146,4 +152,8 @@ function JobList({
       </tbody>
     </Table>
   )
+}
+
+function rowStyle(selected: boolean) {
+  return "transition-colors " + (selected ? "bg-indigo-100 hover:bg-indigo-200" : "hover:bg-base-300")
 }

@@ -13,14 +13,14 @@ export default function Frame() {
 
   return (
     <ToastContext value={new Toast(setToast)}>
-      <nav className="navbar flex min-h-0 px-4 py-2 bg-base-100 shadow">
-        {loggedIn ? <Link to="/employees" className="btn btn-ghost text-xl" viewTransition>Employees</Link> : <></>}
-        {loggedIn ? <Link to="/departments" className="btn btn-ghost text-xl" viewTransition>Departments</Link> : <></>}
-        {loggedIn ? <Link to="/jobs" className="btn btn-ghost text-xl" viewTransition>Jobs</Link> : <></>}
+      <nav className="navbar flex flex-wrap min-h-0 px-4 py-0 xl:py-2 bg-base-100 shadow">
+        {loggedIn ? <Link to="/employees" className="btn btn-ghost max-h-10 text-xl" viewTransition>Employees</Link> : <></>}
+        {loggedIn ? <Link to="/departments" className="btn btn-ghost max-h-10 text-xl" viewTransition>Departments</Link> : <></>}
+        {loggedIn ? <Link to="/jobs" className="btn btn-ghost max-h-10 text-xl" viewTransition>Jobs</Link> : <></>}
         <div className="flex-1" />
-        {!loggedIn ? <Link to="/login" className="btn btn-ghost text-xl" viewTransition>Login</Link> : <></>}
-        {!loggedIn ? <Link to="/login" className="btn btn-ghost text-xl" viewTransition>Register</Link> : <></>}
-        {loggedIn ? <Link to="/login" onClick={() => auth.clearAuth()} className="btn btn-ghost text-xl">Logout</Link> : <></>}
+        {!loggedIn ? <Link to="/login" className="btn btn-ghost max-h-10 text-xl" viewTransition>Login</Link> : <></>}
+        {!loggedIn ? <Link to="/login" className="btn btn-ghost max-h-10 text-xl" viewTransition>Register</Link> : <></>}
+        {loggedIn ? <Link to="/login" onClick={() => auth.clearAuth()} className="btn btn-ghost max-h-10 text-xl">Logout</Link> : <></>}
       </nav>
       <Outlet />
       {toast}

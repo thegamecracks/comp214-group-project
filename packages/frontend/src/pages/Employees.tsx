@@ -44,14 +44,14 @@ export default function Employees() {
   filteredEmployees.sort((a, b) => b.employee_id - a.employee_id)
 
   return (
-    <div className="mx-8 my-4 h-[90svh] grid grid-flow-col grid-cols-5 grid-rows-3 gap-4">
-      <section className="row-span-3 col-span-1 overflow-auto shadow rounded">
+    <div className="mx-8 my-4 h-[90svh] flex flex-col lg:grid grid-flow-col grid-cols-5 grid-rows-3 gap-4">
+      <section className="order-2 min-h-48 lg:order-1 row-span-3 col-span-1 overflow-auto shadow rounded">
         <Banner>
           <h1 className="text-xl font-bold">Filter by department</h1>
         </Banner>
         <DepartmentList departments={departments} selected={[filter.department?.department_id]} onSelect={filterByDepartment} />
       </section>
-      <section className="row-span-2 col-span-4 overflow-auto shadow rounded">
+      <section className="order-1 min-h-96 lg:order-1 row-span-2 col-span-4 overflow-auto shadow rounded">
         <Banner>
           <h1 className="text-2xl font-bold">Current Employees</h1>
           <div className="flex-1" />
@@ -59,7 +59,7 @@ export default function Employees() {
         </Banner>
         <EmployeeList employees={filteredEmployees} selected={[]} onSelect={showEmployee} />
       </section>
-      <section className="row-span-1 col-span-4 overflow-auto shadow rounded">
+      <section className="order-3 min-h-48 lg:order-1 row-span-1 col-span-4 overflow-auto shadow rounded">
         <Banner>
           <h1 className="text-xl font-bold">Filter by job</h1>
         </Banner>

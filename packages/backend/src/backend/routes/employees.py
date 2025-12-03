@@ -15,7 +15,6 @@ class HireEmployee(BaseModel):
     phone_number: str | None = None
     job_id: str
     salary: float | None = None
-    commission_pct: float | None = None
     manager_id: int | None = None
     department_id: int | None = None
 

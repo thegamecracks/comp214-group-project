@@ -1,3 +1,9 @@
+export type Country = {
+    country_id: string
+    region_id: number | null
+    name: string
+}
+
 export type Department = {
     department_id: number
     manager_id: number | null
@@ -25,4 +31,18 @@ export type Job = {
     job_description: string
     min_salary: number | null
     max_salary: number | null
+}
+
+export type Location = {
+    location_id: number
+    country_id: string | null
+    city: string
+    street_address: string | null
+    postal_code: string | null
+    state_province: string | null
+}
+
+export type Region = {
+    region_id: number
+    name: string
 }

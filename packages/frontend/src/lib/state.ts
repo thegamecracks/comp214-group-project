@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 import { useAuth } from "./auth"
 import { useToast } from "./toast"
-import type { Department, Employee, Job } from "@/types"
+import type { Country, Department, Employee, Job, Location, Region } from "@/types"
 
 export function formatEmployee(selected: Employee, {
   departments = [],
@@ -20,6 +20,35 @@ export function formatEmployee(selected: Employee, {
   if (job) name = `${name}, ${job.job_title}`
 
   return name
+}
+
+export function useCountries() {
+  const auth = useAuth()
+  const toast = useToast()
+  const state = useState<Country[] | null>(null)
+  const [countries, setCountries] = state
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        {
+          if (countries) return
+          const { data } = await auth.api.get("/countries", { signal })
+          setCountries(data)
+        }
+      } catch (error) {
+        toast.error(error)
+      }
+    }
+
+    const controller = new AbortController()
+    const signal = controller.signal
+    getData()
+
+    return () => controller.abort()
+  }, [])
+
+  return state
 }
 
 export function useDepartments() {
@@ -93,6 +122,64 @@ export function useJobs() {
           if (jobs) return
           const { data } = await auth.api.get("/jobs", { signal })
           setJobs(data)
+        }
+      } catch (error) {
+        toast.error(error)
+      }
+    }
+
+    const controller = new AbortController()
+    const signal = controller.signal
+    getData()
+
+    return () => controller.abort()
+  }, [])
+
+  return state
+}
+
+export function useLocations() {
+  const auth = useAuth()
+  const toast = useToast()
+  const state = useState<Location[] | null>(null)
+  const [locations, setLocations] = state
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        {
+          if (locations) return
+          const { data } = await auth.api.get("/locations", { signal })
+          setLocations(data)
+        }
+      } catch (error) {
+        toast.error(error)
+      }
+    }
+
+    const controller = new AbortController()
+    const signal = controller.signal
+    getData()
+
+    return () => controller.abort()
+  }, [])
+
+  return state
+}
+
+export function useRegions() {
+  const auth = useAuth()
+  const toast = useToast()
+  const state = useState<Region[] | null>(null)
+  const [regions, setRegions] = state
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        {
+          if (regions) return
+          const { data } = await auth.api.get("/regions", { signal })
+          setRegions(data)
         }
       } catch (error) {
         toast.error(error)

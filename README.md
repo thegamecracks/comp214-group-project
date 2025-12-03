@@ -5,6 +5,8 @@
 - Containerization: [Docker](https://docs.docker.com/) or [Podman](https://podman.io/)
 - Database: [PostgreSQL 18](https://www.postgresql.org/docs/18/index.html)
 - Backend: [Python](https://www.python.org/) with [FastAPI](https://fastapi.tiangolo.com/)
+- Frontend: [React](https://react.dev) with [Axios](https://axios-http.com),
+  [TailwindCSS](https://tailwindcss.com), [DaisyUI](https://daisyui.com), and [Bun](https://bun.sh) runtime
 
 ## Containerization Setup
 

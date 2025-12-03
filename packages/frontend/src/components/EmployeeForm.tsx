@@ -119,8 +119,10 @@ export default function EmployeeForm({
       <div className="flex-1" />
       <div className="flex flex-wrap justify-end gap-4">
         <button onClick={onCancel} className="btn" disabled={pending}>Cancel</button>
-        <button onClick={handleUndo} className="btn" disabled={pending}>Undo</button>
-        <button onClick={handleSubmit} type="submit" className="btn btn-wide" disabled={pending}>Apply</button>
+        {mode === "edit" && <button onClick={handleUndo} className="btn" disabled={pending}>Undo</button>}
+        <button onClick={handleSubmit} type="submit" className="btn btn-wide" disabled={pending}>
+          {mode === "hire" ? "Hire" : "Apply"}
+        </button>
       </div>
     </form>
   )

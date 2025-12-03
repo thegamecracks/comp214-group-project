@@ -78,7 +78,7 @@ export class Toast {
     )
 
     if (axios.isAxiosError(error) && error.config?.baseURL == process.env.BUN_PUBLIC_API) {
-      const message = error.response?.data?.detail
+      const message = error.response?.data?.detail[0].msg || error.response?.data?.detail
       const messageString = message ? String(message) : ""
 
       if (error.status === 401) {

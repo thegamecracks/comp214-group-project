@@ -1,5 +1,6 @@
 import { useReducer, useState } from "react"
 
+import { formatEmployee } from "@/lib/state"
 import type { Department, Employee, Job } from "@/types"
 
 export default function EmployeeForm({
@@ -33,7 +34,7 @@ export default function EmployeeForm({
 
   return (
     <form onSubmit={e => e.preventDefault()} className="h-[90svh] mx-8 my-4 flex flex-col gap-4">
-      <h1 className="text-3xl font-bold">{formatEmployeeName(state, { departments, employees, jobs })}</h1>
+      <h1 className="text-3xl font-bold">{formatEmployee(state, { departments, employees, jobs })}</h1>
       <fieldset className="grid grid-cols-3 gap-4">
         {mode === "edit" && (
           <label className="input input-lg validator">
@@ -100,7 +101,7 @@ export default function EmployeeForm({
           >
             <option value="">None</option>
             {employees.map(emp => (
-              <option key={emp.employee_id} value={emp.employee_id}>{formatEmployeeName(emp, { departments, employees, jobs })}</option>
+              <option key={emp.employee_id} value={emp.employee_id}>{formatEmployee(emp, { departments, employees, jobs })}</option>
             ))}
           </select>
         </label>
@@ -126,24 +127,6 @@ export default function EmployeeForm({
       </div>
     </form>
   )
-}
-
-function formatEmployeeName(selected: Employee, {
-  departments = [],
-  employees = [],
-  jobs = [],
-}: {
-  departments: Department[];
-  employees: Employee[];
-  jobs: Job[];
-}) {
-  let name = selected.last_name
-  if (selected.first_name) name = `${selected.first_name} ${name}`
-
-  const job = selected.job_id && jobs.find(job => job.job_id === selected.job_id)
-  if (job) name = `${name}, ${job.job_title}`
-
-  return name
 }
 
 function useEmployeeReducer(selected: Employee) {

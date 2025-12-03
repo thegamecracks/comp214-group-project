@@ -4,6 +4,24 @@ import { useAuth } from "./auth"
 import { useToast } from "./toast"
 import type { Department, Employee, Job } from "@/types"
 
+export function formatEmployee(selected: Employee, {
+  departments = [],
+  employees = [],
+  jobs = [],
+}: {
+  departments: Department[];
+  employees: Employee[];
+  jobs: Job[];
+}) {
+  let name = selected.last_name
+  if (selected.first_name) name = `${selected.first_name} ${name}`
+
+  const job = selected.job_id && jobs.find(job => job.job_id === selected.job_id)
+  if (job) name = `${name}, ${job.job_title}`
+
+  return name
+}
+
 export function useDepartments() {
   const auth = useAuth()
   const toast = useToast()

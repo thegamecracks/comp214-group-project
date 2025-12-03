@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 import Banner from "@/components/Banner"
-import JobList from "@/components/JobList"
+import Table from "@/components/Table"
 import { useAuth } from "@/lib/auth"
 import { useToast } from "@/lib/toast"
 import type { Job } from "@/types"
@@ -41,5 +41,32 @@ export default function Jobs() {
       </Banner>
       <JobList jobs={jobs} onSelect={showJob} />
     </div>
+  )
+}
+
+function JobList({
+  jobs,
+  onSelect,
+}: {
+  jobs: Job[];
+  onSelect: (emp: Job) => void;
+}) {
+  return (
+    <Table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {jobs.map(job => (
+          <tr key={job.job_id} onClick={() => onSelect(job)} className="hover:bg-base-300 transition-colors">
+            <th>{job.job_id}</th>
+            <td>{job.job_title}</td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
   )
 }

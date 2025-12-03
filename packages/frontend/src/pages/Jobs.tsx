@@ -1,4 +1,5 @@
-import { PlusIcon } from "@heroicons/react/24/outline"
+import { MagnifyingGlassIcon, PlusIcon } from "@heroicons/react/24/outline"
+import { useState } from "react"
 import { Link, useNavigate } from "react-router"
 
 import Banner from "@/components/Banner"
@@ -10,6 +11,7 @@ import type { Job } from "@/types"
 export default function Jobs() {
   const navigate = useNavigate()
   const [jobs] = useJobs()
+  const [search, setSearch] = useState("")
 
   if (!jobs) return <LoadingPage />
 
@@ -17,14 +19,26 @@ export default function Jobs() {
     navigate(`/jobs/${job.job_id}`, { viewTransition: true })
   }
 
+  const filteredJobs = jobs.filter(job => (
+    job.job_id.toLowerCase().includes(search.toLowerCase())
+    || job.job_title.toLowerCase().includes(search.toLowerCase())
+    || job.job_description.toLowerCase().includes(search.toLowerCase())
+    || String(job.min_salary).includes(search.toLowerCase())
+    || String(job.max_salary).includes(search.toLowerCase())
+  ))
+
   return (
     <div className="mx-8 my-4 h-[90svh] flex flex-col">
       <Banner>
         <h1 className="text-xl font-bold">Jobs</h1>
           <div className="flex-1" />
+          <label className="input">
+            <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Filter" />
+            <MagnifyingGlassIcon className="size-6" />
+          </label>
           <Link to="/jobs/new" className="btn" viewTransition><PlusIcon className="size-6" />New</Link>
       </Banner>
-      <JobList jobs={jobs} onSelect={showJob} />
+      <JobList jobs={filteredJobs} onSelect={showJob} />
     </div>
   )
 }

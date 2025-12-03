@@ -5,7 +5,7 @@ export type Department = {
     name: string
 }
 
-    export type Employee = {
+export type Employee = {
     employee_id: number
     first_name: string | null
     last_name: string

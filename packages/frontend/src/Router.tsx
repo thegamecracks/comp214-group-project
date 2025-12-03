@@ -2,9 +2,9 @@ import { createBrowserRouter } from "react-router"
 
 import Frame from "./components/Frame"
 import Departments from "./pages/Departments"
-import EditEmployee from "./pages/EditEmployee"
+import EmployeesEdit from "./pages/EmployeesEdit"
 import Employees from "./pages/Employees"
-import HireEmployee from "./pages/HireEmployee"
+import EmployeesHire from "./pages/EmployeesHire"
 import Home from "./pages/Home"
 import Jobs from "./pages/Jobs"
 import Login from "./pages/Login"
@@ -23,8 +23,8 @@ export const router = createBrowserRouter([
         children: [
           { path: "/employees", Component: Employees },
           { path: "/departments", Component: Departments },
-          { path: "/employees/:id", Component: EditEmployee },
-          { path: "/employees/hire", Component: HireEmployee },
+          { path: "/employees/:id", Component: EmployeesEdit },
+          { path: "/employees/hire", Component: EmployeesHire },
           { path: "/jobs", Component: Jobs },
         ],
       },

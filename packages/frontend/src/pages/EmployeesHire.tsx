@@ -4,7 +4,7 @@ import EmployeeForm from "@/components/EmployeeForm"
 import { useDepartments, useEmployees, useJobs } from "@/lib/state"
 import type { Employee } from "@/types"
 
-export default function HireEmployee() {
+export default function EmployeesHire() {
   const navigate = useNavigate()
   const [departments] = useDepartments()
   const [employees] = useEmployees()

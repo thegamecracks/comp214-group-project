@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router"
 
 import EmployeeForm from "@/components/EmployeeForm"
+import LoadingPage from "@/components/LoadingPage"
 import { useAuth } from "@/lib/auth"
 import { useDepartments, useEmployees, useJobs } from "@/lib/state"
 import { useToast } from "@/lib/toast"
@@ -14,11 +15,7 @@ export default function EmployeesHire() {
   const [employees] = useEmployees()
   const [jobs] = useJobs()
 
-  if (!departments || !employees || !jobs) return (
-    <div className="h-[90svh] flex items-center justify-center">
-      <div className="loading loading-spinner loading-xl"></div>
-    </div>
-  )
+  if (!departments || !employees || !jobs) return <LoadingPage />
 
   const template: Employee = {
     employee_id: 0,

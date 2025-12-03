@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router"
 
 import EmployeeForm from "@/components/EmployeeForm"
+import LoadingPage from "@/components/LoadingPage"
 import { useAuth } from "@/lib/auth"
 import { useDepartments, useEmployees, useJobs } from "@/lib/state"
 import { useToast } from "@/lib/toast"
@@ -21,11 +22,7 @@ export default function EmployeesEdit() {
     </div>
   )
 
-  if (!departments || !employees || !jobs) return (
-    <div className="h-[90svh] flex items-center justify-center">
-      <div className="loading loading-spinner loading-xl"></div>
-    </div>
-  )
+  if (!departments || !employees || !jobs) return <LoadingPage />
 
   const selected = employees.find(emp => String(emp.employee_id) === id)
   if (!selected) return (
@@ -35,6 +32,7 @@ export default function EmployeesEdit() {
   )
 
   async function onSubmit(emp: Employee) {
+    if (!employees) return;
     const payload = { email: emp.email, phone_number: emp.phone_number, salary: emp.salary }
     try {
       const { data } = await auth.api.patch(`/employees/${emp.employee_id}`, payload)

@@ -1,10 +1,13 @@
 import Banner from "@/components/Banner"
+import LoadingPage from "@/components/LoadingPage"
 import Table from "@/components/Table"
 import { useJobs } from "@/lib/state"
 import type { Job } from "@/types"
 
 export default function Jobs() {
   const [jobs] = useJobs()
+
+  if (!jobs) return <LoadingPage />
 
   function showJob(job: Job) {
     // noop

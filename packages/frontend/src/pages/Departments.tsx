@@ -1,10 +1,13 @@
 import Banner from "@/components/Banner"
+import LoadingPage from "@/components/LoadingPage"
 import Table from "@/components/Table"
 import { useDepartments } from "@/lib/state"
 import type { Department } from "@/types"
 
 export default function Departments() {
   const [departments] = useDepartments()
+
+  if (!departments) return <LoadingPage />
 
   function showDepartment(department: Department) {
     // noop

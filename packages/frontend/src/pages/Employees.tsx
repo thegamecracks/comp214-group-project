@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router"
 
 import Banner from "@/components/Banner"
+import LoadingPage from "@/components/LoadingPage"
 import Table from "@/components/Table"
 import { useDepartments, useEmployees, useJobs } from "@/lib/state"
 import type { Department, Employee, Job } from "@/types"
@@ -18,6 +19,8 @@ export default function Employees() {
   const [employees] = useEmployees()
   const [jobs] = useJobs()
   const [filter, setFilter] = useState<EmployeeFilter>({})
+
+  if (!departments || !employees || !jobs) return <LoadingPage />
 
   function filterByDepartment(department: Department) {
     if (filter.department?.department_id !== department.department_id) setFilter({ ...filter, department })

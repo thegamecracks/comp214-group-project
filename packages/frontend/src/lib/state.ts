@@ -25,14 +25,14 @@ export function formatEmployee(selected: Employee, {
 export function useDepartments() {
   const auth = useAuth()
   const toast = useToast()
-  const state = useState<Department[]>([])
+  const state = useState<Department[] | null>(null)
   const [departments, setDepartments] = state
 
   useEffect(() => {
     async function getData() {
       try {
         {
-          if (departments.length > 0) return
+          if (departments) return
           const { data } = await auth.api.get("/departments", { signal })
           setDepartments(data)
         }
@@ -54,14 +54,14 @@ export function useDepartments() {
 export function useEmployees() {
   const auth = useAuth()
   const toast = useToast()
-  const state = useState<Employee[]>([])
+  const state = useState<Employee[] | null>(null)
   const [employees, setEmployees] = state
 
   useEffect(() => {
     async function getData() {
       try {
         {
-          if (employees.length > 0) return
+          if (employees) return
           const { data } = await auth.api.get("/employees", { signal })
           setEmployees(data)
         }
@@ -83,14 +83,14 @@ export function useEmployees() {
 export function useJobs() {
   const auth = useAuth()
   const toast = useToast()
-  const state = useState<Job[]>([])
+  const state = useState<Job[] | null>(null)
   const [jobs, setJobs] = state
 
   useEffect(() => {
     async function getData() {
       try {
         {
-          if (jobs.length > 0) return
+          if (jobs) return
           const { data } = await auth.api.get("/jobs", { signal })
           setJobs(data)
         }

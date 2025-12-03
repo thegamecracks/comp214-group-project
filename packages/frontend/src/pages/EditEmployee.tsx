@@ -134,7 +134,6 @@ function useEmployee(employee_id: string) {
       }
     }
 
-    if (employee) return;
     const controller = new AbortController()
     const signal = controller.signal
     getData()

@@ -15,7 +15,10 @@ export default function EditEmployee() {
     </div>
   )
 
-  const name = employee.first_name ? `${employee.first_name} ${employee.last_name}` : employee.last_name
+  let name = employee.last_name
+  if (employee.first_name) name = `${employee.first_name} ${name}`
+  if (job) name = `${name}, ${job.job_title}`
+
   return (
     <div className="h-[90svh] mx-8 my-4">
       <h1 className="text-3xl font-bold">{name}</h1>

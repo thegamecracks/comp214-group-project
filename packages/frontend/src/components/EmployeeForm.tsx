@@ -1,4 +1,4 @@
-import { useReducer } from "react"
+import { useReducer, useState } from "react"
 
 import type { Department, Employee, Job } from "@/types"
 
@@ -8,7 +8,7 @@ export default function EmployeeForm({
   departments = [],
   employees = [],
   jobs = [],
-  onSubmit = () => { },
+  onSubmit = async () => { },
   onCancel = () => { },
 }: {
   selected: Employee;
@@ -16,13 +16,19 @@ export default function EmployeeForm({
   departments: Department[];
   employees: Employee[];
   jobs: Job[];
-  onSubmit: (emp: Employee) => void;
+  onSubmit: (emp: Employee) => Promise<any>;
   onCancel: () => void;
 }) {
+  const [pending, setPending] = useState(false)
   const [state, dispatch] = useEmployeeReducer(selected)
 
   function handleUndo() {
     Object.entries(selected).forEach(e => dispatch([e[0], e[1]]))
+  }
+
+  function handleSubmit() {
+    setPending(true)
+    onSubmit(state).finally(() => setPending(false))
   }
 
   return (
@@ -112,9 +118,9 @@ export default function EmployeeForm({
       </fieldset>
       <div className="flex-1" />
       <div className="flex flex-wrap justify-end gap-4">
-        <button onClick={onCancel} className="btn">Cancel</button>
-        <button onClick={handleUndo} className="btn">Undo</button>
-        <button onClick={() => onSubmit(state)} type="submit" className="btn btn-wide">Apply</button>
+        <button onClick={onCancel} className="btn" disabled={pending}>Cancel</button>
+        <button onClick={handleUndo} className="btn" disabled={pending}>Undo</button>
+        <button onClick={handleSubmit} type="submit" className="btn btn-wide" disabled={pending}>Apply</button>
       </div>
     </form>
   )

@@ -33,7 +33,8 @@ CREATE TABLE job (
     job_id VARCHAR(10) PRIMARY KEY,
     job_title VARCHAR(35) NOT NULL,
     min_salary NUMERIC(6),
-    max_salary NUMERIC(6)
+    max_salary NUMERIC(6),
+    CONSTRAINT job_id_not_empty CHECK (job_id != '')
 );
 
 CREATE TABLE employee (
@@ -47,7 +48,8 @@ CREATE TABLE employee (
     salary NUMERIC(8,2),
     commission_pct NUMERIC(2,2),
     manager_id BIGINT REFERENCES employee (employee_id) DEFERRABLE,
-    department_id BIGINT REFERENCES department (department_id) DEFERRABLE
+    department_id BIGINT REFERENCES department (department_id) DEFERRABLE,
+    CONSTRAINT email_not_empty CHECK (email != '')
 );
 CREATE INDEX ix_employee_job_id ON employee (job_id);
 CREATE INDEX ix_employee_manager_id ON employee (manager_id);

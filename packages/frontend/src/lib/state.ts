@@ -154,3 +154,28 @@ export function useEmployee(employee_id: string) {
 
   return { department, employee, job, manager }
 }
+
+export function useJob(job_id: string) {
+  const auth = useAuth()
+  const toast = useToast()
+  const [job, setJob] = useState<Job | null>(null)
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const { data } = await auth.api.get(`/jobs/${job_id}`, { signal })
+        setJob(data)
+      } catch (error) {
+        toast.error(error)
+      }
+    }
+
+    const controller = new AbortController()
+    const signal = controller.signal
+    getData()
+
+    return () => controller.abort()
+  }, [])
+
+  return { job }
+}

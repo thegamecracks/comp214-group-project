@@ -30,7 +30,7 @@ export default function Employees() {
   }
 
   function showEmployee(employee: Employee) {
-    navigate(`/employees/${employee.employee_id}`, { state: { employee }, viewTransition: true })
+    navigate(`/employees/${employee.employee_id}`, { viewTransition: true })
   }
 
   const filteredEmployees = employees.filter(emp => {

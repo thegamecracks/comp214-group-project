@@ -22,9 +22,10 @@ export default function EmployeeForm({
 }) {
   const [pending, setPending] = useState(false)
   const [state, dispatch] = useEmployeeReducer(selected)
+  const changed = JSON.stringify(state) !== JSON.stringify(selected)
 
   function handleUndo() {
-    Object.entries(selected).forEach(e => dispatch([e[0], e[1]]))
+    dispatch(["", selected])
   }
 
   function handleSubmit() {
@@ -120,8 +121,8 @@ export default function EmployeeForm({
       <div className="flex-1" />
       <div className="flex flex-wrap justify-end gap-4">
         <button onClick={onCancel} className="btn" disabled={pending}>Cancel</button>
-        {mode === "edit" && <button onClick={handleUndo} className="btn" disabled={pending}>Undo</button>}
-        <button onClick={handleSubmit} type="submit" className="btn btn-wide" disabled={pending}>
+        {mode === "edit" && <button onClick={handleUndo} className="btn" disabled={pending || !changed}>Undo</button>}
+        <button onClick={handleSubmit} type="submit" className="btn btn-wide" disabled={pending || !changed}>
           {mode === "hire" ? "Hire" : "Apply"}
         </button>
       </div>
@@ -130,7 +131,8 @@ export default function EmployeeForm({
 }
 
 function useEmployeeReducer(selected: Employee) {
-  function reducer(state: Employee, [key, value]: [keyof Employee, Employee[keyof Employee]]) {
+  function reducer(state: Employee, [key, value]: [keyof Employee, Employee[keyof Employee]] | ["", Employee]) {
+    if (key === "") return { ...value }
     const nullable: (keyof Employee)[] = ["first_name", "phone_number", "salary", "commission_pct", "manager_id", "department_id"]
     const numeric: (keyof Employee)[] = ["employee_id", "salary", "commission_pct", "manager_id", "department_id"]
     if (nullable.includes(key) && !value) value = null

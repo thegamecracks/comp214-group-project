@@ -15,9 +15,10 @@ export default function JobForm({
 }) {
   const [pending, setPending] = useState(false)
   const [state, dispatch] = useJobReducer(selected)
+  const changed = JSON.stringify(state) !== JSON.stringify(selected)
 
   function handleUndo() {
-    Object.entries(selected).forEach(e => dispatch([e[0], e[1]]))
+    dispatch(["", selected])
   }
 
   function handleSubmit() {
@@ -60,8 +61,8 @@ export default function JobForm({
       <div className="flex-1" />
       <div className="flex flex-wrap justify-end gap-4">
         <button onClick={onCancel} className="btn" disabled={pending}>Cancel</button>
-        {mode === "edit" && <button onClick={handleUndo} className="btn" disabled={pending}>Undo</button>}
-        <button onClick={handleSubmit} type="submit" className="btn btn-wide" disabled={pending}>
+        {mode === "edit" && <button onClick={handleUndo} className="btn" disabled={pending || !changed}>Undo</button>}
+        <button onClick={handleSubmit} type="submit" className="btn btn-wide" disabled={pending || !changed}>
           {mode === "new" ? "New" : "Apply"}
         </button>
       </div>
@@ -70,7 +71,8 @@ export default function JobForm({
 }
 
 function useJobReducer(selected: Job) {
-  function reducer(state: Job, [key, value]: [keyof Job, Job[keyof Job]]) {
+  function reducer(state: Job, [key, value]: [keyof Job, Job[keyof Job]] | ["", Job]) {
+    if (key === "") return { ...value }
     const nullable: (keyof Job)[] = ["min_salary", "max_salary"]
     const numeric: (keyof Job)[] = ["min_salary", "max_salary"]
     if (nullable.includes(key) && !value) value = null

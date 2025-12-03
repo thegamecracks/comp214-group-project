@@ -4,6 +4,7 @@ import Frame from "./components/Frame"
 import Departments from "./pages/Departments"
 import EditEmployee from "./pages/EditEmployee"
 import Employees from "./pages/Employees"
+import HireEmployee from "./pages/HireEmployee"
 import Home from "./pages/Home"
 import Jobs from "./pages/Jobs"
 import Login from "./pages/Login"
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
           { path: "/employees", Component: Employees },
           { path: "/departments", Component: Departments },
           { path: "/employees/:id", Component: EditEmployee },
+          { path: "/employees/hire", Component: HireEmployee },
           { path: "/jobs", Component: Jobs },
         ],
       },

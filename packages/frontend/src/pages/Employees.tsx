@@ -1,6 +1,6 @@
 import { PlusIcon } from "@heroicons/react/24/outline"
 import { useState } from "react"
-import { useNavigate } from "react-router"
+import { Link, useNavigate } from "react-router"
 
 import Banner from "@/components/Banner"
 import Table from "@/components/Table"
@@ -51,7 +51,7 @@ export default function Employees() {
         <Banner>
           <h1 className="text-2xl font-bold">Current Employees</h1>
           <div className="flex-1" />
-          <button className="btn"><PlusIcon className="size-6" />Hire</button>
+          <Link to="/employees/hire" className="btn" viewTransition><PlusIcon className="size-6" />Hire</Link>
         </Banner>
         <EmployeeList employees={filteredEmployees} selected={[]} onSelect={showEmployee} />
       </section>

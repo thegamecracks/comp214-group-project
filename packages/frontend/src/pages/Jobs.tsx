@@ -36,6 +36,9 @@ function JobList({
         <tr>
           <th>#</th>
           <th>Name</th>
+          <th>Description</th>
+          <th>Minimum Salary ($)</th>
+          <th>Maximum Salary ($)</th>
         </tr>
       </thead>
       <tbody>
@@ -43,6 +46,9 @@ function JobList({
           <tr key={job.job_id} onClick={() => onSelect(job)} className="hover:bg-base-300 transition-colors">
             <th>{job.job_id}</th>
             <td>{job.job_title}</td>
+            <td>{job.job_description}</td>
+            <td>{job.min_salary}</td>
+            <td>{job.max_salary}</td>
           </tr>
         ))}
       </tbody>

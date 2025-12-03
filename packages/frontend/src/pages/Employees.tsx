@@ -1,11 +1,10 @@
 import { PlusIcon } from "@heroicons/react/24/outline"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router"
 
 import Banner from "@/components/Banner"
 import Table from "@/components/Table"
-import { useAuth } from "@/lib/auth"
-import { useToast } from "@/lib/toast"
+import { useDepartments, useEmployees, useJobs } from "@/lib/state"
 import type { Department, Employee, Job } from "@/types"
 
 type EmployeeFilter = {
@@ -14,40 +13,11 @@ type EmployeeFilter = {
 }
 
 export default function Employees() {
-  const auth = useAuth()
   const navigate = useNavigate()
-  const toast = useToast()
-  const [departments, setDepartments] = useState<Department[]>([])
-  const [employees, setEmployees] = useState<Employee[]>([])
-  const [jobs, setJobs] = useState<Job[]>([])
+  const [departments] = useDepartments()
+  const [employees] = useEmployees()
+  const [jobs] = useJobs()
   const [filter, setFilter] = useState<EmployeeFilter>({})
-
-  useEffect(() => {
-    async function getData() {
-      try {
-        {
-          const { data } = await auth.api.get("/departments", { signal })
-          setDepartments(data)
-        }
-        {
-          const { data } = await auth.api.get("/employees", { signal })
-          setEmployees(data)
-        }
-        {
-          const { data } = await auth.api.get("/jobs", { signal })
-          setJobs(data)
-        }
-      } catch (error) {
-        toast.error(error)
-      }
-    }
-
-    const controller = new AbortController()
-    const signal = controller.signal
-    getData()
-
-    return () => controller.abort()
-  }, [])
 
   function filterByDepartment(department: Department) {
     if (filter.department?.department_id !== department.department_id) setFilter({ ...filter, department })

@@ -1,34 +1,10 @@
-import { useEffect, useState } from "react"
-
 import Banner from "@/components/Banner"
 import Table from "@/components/Table"
-import { useAuth } from "@/lib/auth"
-import { useToast } from "@/lib/toast"
+import { useJobs } from "@/lib/state"
 import type { Job } from "@/types"
 
 export default function Jobs() {
-  const auth = useAuth()
-  const toast = useToast()
-  const [jobs, setJobs] = useState<Job[]>([])
-
-  useEffect(() => {
-    async function getJobs() {
-      try {
-        {
-          const { data } = await auth.api.get("/jobs", { signal })
-          setJobs(data)
-        }
-      } catch (error) {
-        toast.error(error)
-      }
-    }
-
-    const controller = new AbortController()
-    const signal = controller.signal
-    getJobs()
-
-    return () => controller.abort()
-  }, [])
+  const [jobs] = useJobs()
 
   function showJob(job: Job) {
     // noop

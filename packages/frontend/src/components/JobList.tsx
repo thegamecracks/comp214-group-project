@@ -1,3 +1,4 @@
+import Table from "./Table"
 import type { Job } from "@/types"
 
 export default function JobList({
@@ -8,23 +9,21 @@ export default function JobList({
   onSelect: (emp: Job) => void;
 }) {
   return (
-    <div className="overflow-auto">
-      <table className="table table-zebra">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
+    <Table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {jobs.map(job => (
+          <tr key={job.job_id} onClick={() => onSelect(job)} className="hover:bg-base-300 transition-colors">
+            <th>{job.job_id}</th>
+            <td>{job.job_title}</td>
           </tr>
-        </thead>
-        <tbody>
-          {jobs.map(job => (
-            <tr key={job.job_id} onClick={() => onSelect(job)} className="hover:bg-base-300 transition-colors">
-              <th>{job.job_id}</th>
-              <td>{job.job_title}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        ))}
+      </tbody>
+    </Table>
   )
 }

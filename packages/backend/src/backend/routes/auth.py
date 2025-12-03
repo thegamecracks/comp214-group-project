@@ -97,7 +97,7 @@ def generate_token_response(account_id: str | UUID) -> TokenResponse:
     )
     # DANGER: this will not revoke the previous refresh token!
     refresh_token = jwt.encode(
-        {"sub": sub, "exp": now + datetime.timedelta(days=1), "iat": now},
+        {"sub": sub, "exp": now + datetime.timedelta(hours=1), "iat": now},
         JWT_REFRESH_SECRET,
         "HS256",
     )

@@ -11,6 +11,12 @@ class AccountModel(BaseModel):
     name: str
 
 
+class Country(BaseModel):
+    country_id: str
+    region_id: int | None
+    name: str
+
+
 class Department(BaseModel):
     department_id: int
     manager_id: int | None
@@ -38,3 +44,17 @@ class Job(BaseModel):
     job_description: str
     min_salary: float | None
     max_salary: float | None
+
+
+class Location(BaseModel):
+    location_id: int
+    country_id: str | None
+    city: str
+    street_address: str | None
+    postal_code: str | None
+    state_province: str | None
+
+
+class Region(BaseModel):
+    region_id: int
+    name: str

@@ -86,3 +86,9 @@
    ```sh
    uv run --directory packages/backend/src/ --env-file ../../../.env -m uvicorn backend:app --reload
    ```
+
+## License
+
+This project is written under the [MIT License].
+
+[MIT License]: /LICENSE

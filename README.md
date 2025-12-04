@@ -1,5 +1,7 @@
 # comp214-group-project
 
+![](https://github.com/user-attachments/assets/4a074b52-8fb1-4418-9338-3d5ba3bc4404)
+
 ## Technologies
 
 - Containerization: [Docker](https://docs.docker.com/) or [Podman](https://podman.io/)
